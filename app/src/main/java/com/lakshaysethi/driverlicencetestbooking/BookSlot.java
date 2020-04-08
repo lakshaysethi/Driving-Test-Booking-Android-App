@@ -26,6 +26,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
     private Spinner bookingDateSpinner;
     private String bookingSlot;
     private Spinner bookingSlotSpinner;
+
     public static ArrayList<Slot> slotsList;
     public static ArrayList<User> users = new ArrayList<User>();
 
@@ -33,10 +34,8 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_slot_form);
+
         bookButton = findViewById(R.id.book);
-
-
-
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,13 +193,13 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
         ArrayAdapter<String> dateAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,nextFiveWorkingDays); //selected item will look like a spinner set from XML
         dateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         bookingSlotSpinner.setAdapter(dateAdapter);
-        bookingSlotSpinner.setOnItemClickListener(this);
+        //bookingSlotSpinner.setOnItemClickListener(this);
 
         //Populates Slots in dropdown spinner menu
         ArrayAdapter<CharSequence> slotAdapter = ArrayAdapter.createFromResource(this, R.array.SlotNames, android.R.layout.simple_spinner_item);
         slotAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         bookingSlotSpinner.setAdapter(slotAdapter);
-        bookingSlotSpinner.setOnItemClickListener(this);
+        //bookingSlotSpinner.setOnItemClickListener(this);
 
 
 
