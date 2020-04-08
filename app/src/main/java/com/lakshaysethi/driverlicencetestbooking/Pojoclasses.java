@@ -14,7 +14,7 @@ public class Pojoclasses {
 
         @Override
         public String toString() {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             String dateString = sdf.format(date);
             return "date and time: " + dateString;
         }

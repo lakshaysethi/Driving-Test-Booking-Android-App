@@ -52,8 +52,9 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
 
 
         //populate the spinners
-
-
+        ArrayAdapter<Slot> slotArrayAdapter = new ArrayAdapter<Slot>(this,android.R.layout.simple_spinner_item,MainActivity.slotsList);
+        slotArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bookingSlotSpinner.setAdapter(slotArrayAdapter);
 
     }
 
