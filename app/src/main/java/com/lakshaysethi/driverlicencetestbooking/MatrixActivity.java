@@ -9,7 +9,7 @@ import android.os.Bundle;
 public class MatrixActivity extends AppCompatActivity {
 
 
-    RecyclerView.LayoutManager recycLayoutmanager;
+
     RecyclerView dateRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,9 +17,9 @@ public class MatrixActivity extends AppCompatActivity {
         setContentView(R.layout.activity_matrix);
 
         dateRecyclerView = (RecyclerView) findViewById(R.id.dateRecyclerView);
-        recycLayoutmanager = new LinearLayoutManager(this);
-        dateRecyclerView.setLayoutManager(recycLayoutmanager);
+        dateRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        dateRecyclerView.setAdapter(new SlotAdapter(MainActivity.slotsList,this));
 
     }
 }

@@ -34,7 +34,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SlotViewHolder holder, int position) {
-        holder.availableInstructorsTextView.setText(slotAdapterSlotArrayList.get(position).remainingTimes);
+        holder.availableInstructorsTextView.setText(Integer.toString(slotAdapterSlotArrayList.get(position).remainingTimes));
         holder.timeTextView.setText(slotAdapterSlotArrayList.get(position).getTime());
     }
 

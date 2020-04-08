@@ -89,9 +89,9 @@ public class MainActivity extends AppCompatActivity {
 
 
        }else{
-           String startDateString = "11/04/2020 09:00";
+           String startDateString = "09/04/2020 09:00";
 
-           SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
+           SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
            Date startDate = null;
            try {
                startDate = sdf.parse(startDateString);
@@ -99,18 +99,27 @@ public class MainActivity extends AppCompatActivity {
                e.printStackTrace();
            }
            Date dateForSlot = startDate;
+           Calendar cal = Calendar.getInstance(); // creates calendar
 
-           for (int i = 0; i < 40; i++) {
-            //TODO make sure weekends are ignored
-               slotsList.add(new Pojoclasses.Slot(dateForSlot));
-               // long millis = date.getTime();
+           for (int i = 0; i < 7; i++) {//days
+               cal.setTime(dateForSlot);
+               // sets calendar time/date
+               if(cal.get(Calendar.DAY_OF_WEEK)==1||cal.get(Calendar.DAY_OF_WEEK)==7){
+                   cal.add(Calendar.DAY_OF_WEEK, 1); // adds day
+                   dateForSlot = cal.getTime();
+               }else{
+                   dateForSlot = cal.getTime();
+                   for (int j = 0; j < 8; j++) {//8 slots each day
+                       slotsList.add(new Pojoclasses.Slot(dateForSlot));
+                       // long millis = date.getTime();
+//                   cal.setTime(dateForSlot); // sets calendar time/date
+                       cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
+                       dateForSlot = cal.getTime();
 
-               Calendar cal = Calendar.getInstance(); // creates calendar
-               cal.setTime(dateForSlot); // sets calendar time/date
-               cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-               dateForSlot = cal.getTime();
-
-
+                   }
+                   cal.add(Calendar.HOUR_OF_DAY, 16);
+                   dateForSlot = cal.getTime();
+               }
            }
        }
 
