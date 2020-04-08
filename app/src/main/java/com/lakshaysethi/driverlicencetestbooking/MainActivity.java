@@ -8,7 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static ArrayList<Pojoclasses.Slot> slotsList= new ArrayList<Pojoclasses.Slot>();
+    public static ArrayList<Pojoclasses.User> users = new ArrayList<Pojoclasses.User>();
+
+    public static Pojoclasses.User currentUser;//Need to populate on click of main activity
 
     private Button continueButton;
     private EditText licenceInputText;
@@ -17,23 +24,40 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        licenceInputText = findViewById(R.id.licenceInput);
-        licenceString =  licenceInputText.toString();
 
-        continueButton =(Button) findViewById(R.id.button);
+        //read from data base and make static
+        populateUsersArrayListFromDatabase();
+        populateSlotsArrayListFromDatabase();
+
+
+        licenceInputText = findViewById(R.id.licenceInput);
+
+
+
+        continueButton =(Button) findViewById(R.id.bookButton);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openBookingActivity(licenceString);
+                licenceString =  licenceInputText.toString();
+                currentUser = new Pojoclasses.User(licenceString);
+                openBookingActivity();
             }
         });
 
     }
 
+    private void populateSlotsArrayListFromDatabase() {
+        //TODO
+    }
 
-    public void openBookingActivity(String licenceString){
+    private void populateUsersArrayListFromDatabase() {
+        //TODO
+    }
+
+//
+    public void openBookingActivity(){
         Intent intent = new Intent(this,BookSlot.class);
-        intent.putExtra("licenceNumber",licenceString);
+        //intent.putExtra("licenceNumber",licenceString);
         startActivity(intent);
     }
 }

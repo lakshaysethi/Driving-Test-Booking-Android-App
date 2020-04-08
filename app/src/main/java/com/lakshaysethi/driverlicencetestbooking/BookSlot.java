@@ -19,45 +19,61 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.Booking;
+import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.User;
+import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.Slot;
 
 public class BookSlot extends Activity implements AdapterView.OnItemClickListener {
     private Button bookButton;
-    private Date bookingDate;
-    private Spinner bookingDateSpinner;
-    private String bookingSlot;
-    private Spinner bookingSlotSpinner;
-
-    public static ArrayList<Slot> slotsList;
-    public static ArrayList<User> users = new ArrayList<User>();
+    //    private Date bookingDate;
+    //    private Spinner bookingDateSpinner;
+    //    private String bookingSlot;
+    //    private Spinner bookingSlotSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_slot_form);
 
+
+
         bookButton = findViewById(R.id.book);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean is_success = doTheseThings();
+
+                String userLicence = u1.licenceNumber;
+                if (day!=null){
+                    if (hour!=null){
+                        if (slot_available(day, hour) != null) {
+                            bookTimeSlot(u1, day, hour);
+                        } else {
+                            showNotBookedMessage();
+                        }
+                    }
+                }
+                // boolean is_success = doTheseThings();
+                  
+
+                printAllBookings(users);
             }
 
             private boolean doTheseThings() {
-                String licenceNumber = "123";
-                User u1 = createNewUser(licenceNumber);
+//                String licenceNumber = "123";
+//                User u1 = createNewUser(licenceNumber);
                 users.add(u1);
                 String day = "11/04/2020";
                 int hour = 900;
                 String startDateString = "11/04/2020 09:00";
                 ArrayList<Slot> slotsList = openShop(startDateString);
 
-                if (slot_available(day, hour) != null) {
-                    bookTimeSlot(u1, day, hour);
-                } else {
-                    showNotBookedMessage();
-                }
+                // if (slot_available(day, hour) != null) {
+                //     bookTimeSlot(u1, day, hour);
+                // } else {
+                //     showNotBookedMessage();
+                // }
 
-                printAllBookings(users);
+                // printAllBookings(users);
                 return true;
             }
 
@@ -65,9 +81,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
                 System.out.println("Not Booked");
             }
 
-            private User createNewUser(String licenceNumber) {
-                return new User(licenceNumber);
-            }
+
 
             private Slot slot_available(String day, int hour) {
                 String hourString = Integer.toString(hour);
@@ -205,7 +219,11 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
 
     }
 
-    @Override
+   
+
+
+
+     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String selectedSlot = parent.getItemAtPosition(position).toString();
         Toast.makeText(parent.getContext(), selectedSlot, Toast.LENGTH_SHORT).show();
@@ -219,59 +237,8 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
 
     }
 
-    public static class Slot {
-        public int remainingTimes;
-        public Date date;
 
-        @Override
-        public String toString() {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-            String dateString = sdf.format(date);
-            return "date and time: " + dateString;
-        }
-
-        public Slot(Date date) {
-            this.date = date;
-            this.remainingTimes = 10;
-
-        }
-
-    }
-
-    public static class User {
-        private String licenceNumber;
-        private ArrayList<Booking> bookingsList;
-
-        public User(String licenceNumber) {
-            this.licenceNumber = licenceNumber;
-            this.bookingsList = new ArrayList<Booking>();
-
-        }
-
-        public String getLicenceNumber() {
-            return licenceNumber;
-        }
-
-        public void setLicenceNumber(String licenceNumber) {
-            this.licenceNumber = licenceNumber;
-        }
-
-        public ArrayList<Booking> getBookingsList() {
-            return bookingsList;
-        }
-
-        public void setBookingsList(ArrayList<Booking> bookingsList) {
-            this.bookingsList = bookingsList;
-        }
-    }
-
-    public static class Booking {
-        public Slot slot;
-        public String refNo;
-
-        public Booking(Slot slot) {
-            this.slot = slot;
-            this.refNo = "#" + UUID.randomUUID().toString();//+ " "+ this.slot.toString();
-        }
+    private User createNewUser(String licenceNumber) {
+        return new User(licenceNumber);
     }
 }
