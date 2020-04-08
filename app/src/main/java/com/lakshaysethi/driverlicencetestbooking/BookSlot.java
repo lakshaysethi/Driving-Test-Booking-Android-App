@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -33,29 +34,28 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_slot_form);
 
-
         bookButton = findViewById(R.id.book);
+
+
+
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               boolean is_success = doTheseThings();
+                boolean is_success = doTheseThings();
             }
 
             private boolean doTheseThings() {
                 String licenceNumber = "123";
-                User u1= createNewUser(licenceNumber);
+                User u1 = createNewUser(licenceNumber);
                 users.add(u1);
                 String day = "2020/04/11";
                 int hour = 900;
                 String startDateString = "2020/04/11 09:00";
                 ArrayList<Slot> slotsList = openShop(startDateString);
 
-                if(slot_available(day,hour)!=null)
-                {
-                    bookTimeSlot(u1,day,hour);
-                }
-
-                else {
+                if (slot_available(day, hour) != null) {
+                    bookTimeSlot(u1, day, hour);
+                } else {
                     showNotBookedMessage();
                 }
 
@@ -67,27 +67,27 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
                 System.out.println("Not Booked");
             }
 
-            private  User createNewUser(String licenceNumber) {
+            private User createNewUser(String licenceNumber) {
                 return new User(licenceNumber);
             }
 
             private Slot slot_available(String day, int hour) {
                 String hourString = Integer.toString(hour);
 
-                if(hour<959){
-                    hourString = "0"+hourString;
+                if (hour < 959) {
+                    hourString = "0" + hourString;
                     hourString = hourString.substring(0, 2) + ":" + hourString.substring(2, hourString.length());
                     System.out.println(hourString);
 
-                }else{
+                } else {
                     hourString = hourString.substring(0, 2) + ":" + hourString.substring(2, hourString.length());
                 }
 
 
-                String correctString = day + " "+ hourString;
+                String correctString = day + " " + hourString;
 
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
-                Date dateToCheck =  null;
+                Date dateToCheck = null;
                 try {
                     dateToCheck = sdf.parse(correctString);
                 } catch (ParseException e) {
@@ -95,10 +95,10 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
                 }
 
 
-                for (int i=0;i<slotsList.size();i++){
+                for (int i = 0; i < slotsList.size(); i++) {
                     Slot testSlot = slotsList.get(i);
-                    if(testSlot.date.equals(dateToCheck)){
-                        if(testSlot.remainingTimes>=1){
+                    if (testSlot.date.equals(dateToCheck)) {
+                        if (testSlot.remainingTimes >= 1) {
                             testSlot.remainingTimes--;
                             return testSlot;
                         }
@@ -108,7 +108,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
                 return null;
             }
 
-            private  void bookTimeSlot(User u1, String day, int hour) {
+            private void bookTimeSlot(User u1, String day, int hour) {
                 Slot selectedSlot = slot_available(day, hour);
                 Booking newBooking = new Booking(selectedSlot);
                 //CHECK LATER - need to chk if this user has already booked this slot then he can not book again
@@ -129,7 +129,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
                 }
                 Date dateForSlot = startDate;
 
-                for (int i=0;i<40;i++){
+                for (int i = 0; i < 40; i++) {
 
                     slotsList.add(new Slot(dateForSlot));
                     // long millis = date.getTime();
@@ -137,23 +137,22 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
                     Calendar cal = Calendar.getInstance(); // creates calendar
                     cal.setTime(dateForSlot); // sets calendar time/date
                     cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-                    dateForSlot=cal.getTime();
+                    dateForSlot = cal.getTime();
 
 
                 }
 
 
-
                 return slotsList;
             }
 
-            private  void printAllBookings(ArrayList<User> users) {
+            private void printAllBookings(ArrayList<User> users) {
                 System.out.println("List of all bookings");
-                for(int i=0;i<users.size();i++){
-                    System.out.println("for "+users.get(i).licenceNumber);
-                    for(int j=0;j<users.get(i).bookingsList.size();j++){
-                        System.out.println("      "+users.get(i).bookingsList.get(j).refNo);
-                        System.out.println("      "+users.get(i).bookingsList.get(j).slot.toString());
+                for (int i = 0; i < users.size(); i++) {
+                    System.out.println("for " + users.get(i).licenceNumber);
+                    for (int j = 0; j < users.get(i).bookingsList.size(); j++) {
+                        System.out.println("      " + users.get(i).bookingsList.get(j).refNo);
+                        System.out.println("      " + users.get(i).bookingsList.get(j).slot.toString());
                     }
                 }
 
@@ -161,8 +160,6 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
 
 
         });
-
-
 
 
         ////////////////////////////////////////Load Screen//////////////////////////////////////////
@@ -180,45 +177,43 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
         DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         Calendar c1 = Calendar.getInstance();
         Date today = Calendar.getInstance().getTime();
-       //yesterday
-        c1.add(Calendar.DATE,-1);
+        //yesterday
+        c1.add(Calendar.DATE, -1);
 
         ArrayList<String> nextFiveWorkingDays = new ArrayList<String>();
 
-        while (nextFiveWorkingDays.size()<=5){
-            if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+        while (nextFiveWorkingDays.size() <= 5) {
+            if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY || c1.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
 
-            }else {
-                nextFiveWorkingDays.add( sdf.format(today));
+            } else {
+                nextFiveWorkingDays.add(sdf.format(today));
             }
 
         }
+        ///Dates
 
-        ArrayAdapter<CharSequence> dateAdapter = ArrayAdapter.createFromResource(this,R.array.SlotNames,android.R.layout.simple_spinner_item);
-        slotAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-        bookingSlotSpinner.setAdapter(slotAdapter);
+        ArrayAdapter<String> dateAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,nextFiveWorkingDays); //selected item will look like a spinner set from XML
+        dateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
+        bookingSlotSpinner.setAdapter(dateAdapter);
         bookingSlotSpinner.setOnItemClickListener(this);
-
-
 
         //Populates Slots in dropdown spinner menu
-        ArrayAdapter<CharSequence> slotAdapter = ArrayAdapter.createFromResource(this,R.array.SlotNames,android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> slotAdapter = ArrayAdapter.createFromResource(this, R.array.SlotNames, android.R.layout.simple_spinner_item);
         slotAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
         bookingSlotSpinner.setAdapter(slotAdapter);
         bookingSlotSpinner.setOnItemClickListener(this);
 
 
-        setContentView(R.layout.book_slot_form);
-
-        bookButton =   findViewById(R.id.bookButton);
 
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String selectedSlot = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(),selectedSlot,Toast.LENGTH_SHORT).show();
+        Toast.makeText(parent.getContext(), selectedSlot, Toast.LENGTH_SHORT).show();
+
         //At this time, just store the value in a selected_slot_string
+
     }
 
     @Override
@@ -226,7 +221,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
 
     }
 
-    public static class Slot{
+    public static class Slot {
         public int remainingTimes;
         public Date date;
 
@@ -244,7 +239,8 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
         }
 
     }
-    public static class User{
+
+    public static class User {
         private String licenceNumber;
         private ArrayList<Booking> bookingsList;
 
@@ -270,13 +266,14 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
             this.bookingsList = bookingsList;
         }
     }
-    public static class Booking{
+
+    public static class Booking {
         public Slot slot;
         public String refNo;
 
         public Booking(Slot slot) {
             this.slot = slot;
-            this.refNo = "#" + UUID.randomUUID().toString() ;//+ " "+ this.slot.toString();
+            this.refNo = "#" + UUID.randomUUID().toString();//+ " "+ this.slot.toString();
         }
     }
 }
