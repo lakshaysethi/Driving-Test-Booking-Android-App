@@ -25,6 +25,16 @@ public class Pojoclasses {
 
         }
 
+        public String getDate() {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            String dateString = sdf.format(date);
+            return dateString;
+        }
+        public String getTime() {
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            String dateString = sdf.format(date);
+            return dateString;
+        }
     }
 
     public static class User {
