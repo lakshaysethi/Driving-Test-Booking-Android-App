@@ -59,11 +59,12 @@ public class MainActivity extends AppCompatActivity {
         for(Pojoclasses.User user : usersStaticList ){
             if (user.licenceNumber.equals(licenceInputText.getText().toString())){
                 Toast.makeText(this,"Welcome Back! :)",Toast.LENGTH_LONG);
-
+                currentUser = user;
             }
         }
         Pojoclasses.User newUser = new Pojoclasses.User(licenceInputText.getText().toString());
         usersStaticList.add(newUser);
+        currentUser = newUser;
         saveUserStaticLisToDatabase();
         Toast.makeText(this,"Welcome New User! you have been added to the Database :)",Toast.LENGTH_LONG);
     }

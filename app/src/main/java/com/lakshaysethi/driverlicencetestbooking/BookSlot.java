@@ -7,7 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,17 +26,45 @@ import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.Booking;
 import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.User;
 import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.Slot;
 
-public class BookSlot extends Activity {//implements AdapterView.OnItemClickListener {
+public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItemClickListener {
 
 
     private Button bookButton;
     private Spinner bookingDateSpinner;
     private Spinner bookingSlotSpinner;
+    private TextView licenceNumberTextView;
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.book_slot_form);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.book_slot_form);
+
+
+        bookButton = (Button)findViewById(R.id.continueButton);
+        bookingDateSpinner=(Spinner) findViewById(R.id.dateSpinner);
+        bookingSlotSpinner=(Spinner) findViewById(R.id.slotSpinner);
+        licenceNumberTextView = (TextView) findViewById(R.id.licenceTextView);
+
+
+        //set the licence number on this screen:
+        licenceNumberTextView.setText(MainActivity.currentUser.licenceNumber);
+
+
+        //populate the spinners
+
+
+
+    }
+
+
+}
+
+
+
+
+
+
 //
 //
 //
@@ -237,8 +268,3 @@ public class BookSlot extends Activity {//implements AdapterView.OnItemClickList
 //
 //    }
 
-
-    private User createNewUser(String licenceNumber) {
-        return new User(licenceNumber);
-    }
-}
