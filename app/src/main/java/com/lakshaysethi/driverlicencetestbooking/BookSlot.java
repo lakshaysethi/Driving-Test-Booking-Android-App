@@ -81,7 +81,7 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
 
 
 
-    public boolean bookTimeSlot(User u1, String day, int hour) {
+    public static boolean bookTimeSlot(User u1, String day, int hour) {
         try {
 
             if (userHasMoreThanTwoBookings(selectedSlot)) {
