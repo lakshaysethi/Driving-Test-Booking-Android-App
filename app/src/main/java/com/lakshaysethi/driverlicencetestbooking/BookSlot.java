@@ -33,7 +33,6 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.book_slot_form);
-
         bookButton = findViewById(R.id.book);
 
 
@@ -48,9 +47,9 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
                 String licenceNumber = "123";
                 User u1 = createNewUser(licenceNumber);
                 users.add(u1);
-                String day = "2020/04/11";
+                String day = "11/04/2020";
                 int hour = 900;
-                String startDateString = "2020/04/11 09:00";
+                String startDateString = "11/04/2020 09:00";
                 ArrayList<Slot> slotsList = openShop(startDateString);
 
                 if (slot_available(day, hour) != null) {
@@ -86,7 +85,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
 
                 String correctString = day + " " + hourString;
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
                 Date dateToCheck = null;
                 try {
                     dateToCheck = sdf.parse(correctString);
@@ -120,7 +119,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
 
                 slotsList = new ArrayList<Slot>();
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/YYYY HH:mm");
                 Date startDate = null;
                 try {
                     startDate = sdf.parse(startDateString);
@@ -174,7 +173,7 @@ public class BookSlot extends Activity implements AdapterView.OnItemClickListene
         //TODO:bookingDateSpinner
         //Array of dates
         //1-8 Date dd-MM-yyyy + Slot number [1,2,3,4,5,6,7,8]
-        DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        DateFormat sdf = new SimpleDateFormat("dd/MM/YYYY");
         Calendar c1 = Calendar.getInstance();
         Date today = Calendar.getInstance().getTime();
         //yesterday
