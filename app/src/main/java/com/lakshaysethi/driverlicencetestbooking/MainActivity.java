@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void openBookingActivity(String licenceString){
-        Intent intent = new Intent(this,bookSlot.class);
+        Intent intent = new Intent(this,BookSlot.class);
         intent.putExtra("licenceNumber",licenceString);
         startActivity(intent);
     }

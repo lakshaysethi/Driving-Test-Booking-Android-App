@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">DriverLicenceTestBooking</string>
+    <string name="default_slot_name">9 AM</string>
+    <string name="LicenseString" />
+    <string-array name="SlotNames">
+        <item>Slot 1 : 9AM to 10AM </item>
+        <item>Slot 2 : 10AM to 11AM </item>
+        <item>Slot 3 : 11AM to 12PM </item>
+        <item>Slot 4 : 12PM to 1PM </item>
+        <item>Slot 5 : 1PM to 2PM </item>
+        <item>Slot 6 : 2PM to 3PM </item>
+        <item>Slot 7 : 3PM to 4PM </item>
+        <item>Slot 8 : 4PM to 5PM </item>
+    </string-array>
 </resources>
