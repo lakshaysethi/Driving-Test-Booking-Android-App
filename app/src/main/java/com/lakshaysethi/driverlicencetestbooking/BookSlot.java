@@ -93,6 +93,7 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
                 if (slot_available(day, hour) != null) {
                     selectedSlot = slot_available(day, hour);
                     selectedSlot.remainingTimes--;
+                    Booking newBooking = new Booking(selectedSlot);
                     //CHECK LATER - need to chk if this user has already booked this slot then he can not book again
                     u1.bookingsList.add(newBooking);
                     return true;
@@ -101,10 +102,11 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
                     System.out.println("FAILED to book");
                     return false;
                 }
-            }
-
-        }catch(Exception e){
+                }
+            }catch(Exception e){
             e.printStackTrace();
+
+
         }
         return false;
     }
