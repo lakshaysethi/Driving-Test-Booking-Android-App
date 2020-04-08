@@ -15,10 +15,8 @@ public class MatrixActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matrix);
-
         dateRecyclerView = (RecyclerView) findViewById(R.id.dateRecyclerView);
         dateRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         dateRecyclerView.setAdapter(new SlotAdapter(MainActivity.slotsList,this));
 
     }

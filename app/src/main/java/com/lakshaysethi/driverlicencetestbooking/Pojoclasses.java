@@ -35,6 +35,20 @@ public class Pojoclasses {
             String dateString = sdf.format(date);
             return dateString;
         }
+        public int getTimeInInt(){
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+            String dateString = sdf.format(date);
+            String[] arr =  dateString.split(":");
+
+            int timeInt=900;
+            try{
+                dateString = arr[0]+arr[1];
+                timeInt = Integer.parseInt(dateString);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return timeInt;
+        }
     }
 
     public static class User {

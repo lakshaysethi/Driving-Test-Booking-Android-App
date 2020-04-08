@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/slotButtonLinearLayout"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+
+    <TextView
+        android:id="@+id/slotTimeTextView"
+        android:layout_width="150dp"
+        android:layout_height="25dp"
+        android:text="Time:"
+        android:textSize="17sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 
 
         <TextView
-            android:id="@+id/slotTimeTextView"
-            android:layout_width="120dp"
+            android:textSize="17sp"
+            android:id="@+id/slotRemainingTextView"
+            android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Time:"
+            android:text="Available Instructors"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-
-    <TextView
-        android:id="@+id/slotRemainingTextView"
+    <Button
+        android:id="@+id/matrixBookButton"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="Available Instructors"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
+        android:layout_height="wrap_content"
+
+        android:text="Book"
+        android:textSize="12sp" />
+
+
+</LinearLayout>

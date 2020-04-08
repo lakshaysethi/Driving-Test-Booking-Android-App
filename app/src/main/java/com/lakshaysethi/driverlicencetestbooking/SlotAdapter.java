@@ -4,21 +4,26 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import com.lakshaysethi.driverlicencetestbooking.BookSlot;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+import static com.lakshaysethi.driverlicencetestbooking.MainActivity.currentUser;
+
 public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder> {
 
     ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList;
-    Context contect;
+    Context context;
 
-    public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context contect) {
+
+    public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context) {
         this.slotAdapterSlotArrayList = slotAdapterSlotArrayList;
-        this.contect = contect;
+        this.context = context;
     }
 
     @NonNull
@@ -33,9 +38,26 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SlotViewHolder holder, int position) {
-        holder.availableInstructorsTextView.setText(Integer.toString(slotAdapterSlotArrayList.get(position).remainingTimes));
-        holder.timeTextView.setText(slotAdapterSlotArrayList.get(position).getTime());
+    public void onBindViewHolder(@NonNull final SlotViewHolder holder, final int position) {
+        final TextView availableInstructorsTextView= holder.availableInstructorsTextView;
+
+        final TextView timeTextView= holder.timeTextView;
+
+
+
+        holder.availableInstructorsTextView.setText("Available Instructors: "+Integer.toString(slotAdapterSlotArrayList.get(position).remainingTimes));
+        holder.timeTextView.setText("Time: " + slotAdapterSlotArrayList.get(position).getTime() + " 1 Hr");
+        holder.selectedSlot =slotAdapterSlotArrayList.get(position);
+        holder.matrixBookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Pojoclasses.User u1 = currentUser;
+                String day = holder.selectedSlot.getDate();
+                int hour = holder.selectedSlot.getTimeInInt();
+                BookSlot.bookTimeSlot( u1,  day,  hour);
+                onBindViewHolder( holder,  position);
+            }
+        });
     }
 
     @Override
@@ -47,12 +69,15 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
     public static class SlotViewHolder extends RecyclerView.ViewHolder{
         TextView timeTextView;
         TextView availableInstructorsTextView;
+        Button matrixBookButton;
+        Pojoclasses.Slot selectedSlot;
 
         public SlotViewHolder(@NonNull View itemView) {
             super(itemView);
             timeTextView = (TextView) itemView.findViewById(R.id.slotTimeTextView);
             availableInstructorsTextView = (TextView) itemView.findViewById(R.id.slotRemainingTextView);
-
+            matrixBookButton = (Button) itemView.findViewById(R.id.matrixBookButton);
+            selectedSlot = null;
         }
     }
 }

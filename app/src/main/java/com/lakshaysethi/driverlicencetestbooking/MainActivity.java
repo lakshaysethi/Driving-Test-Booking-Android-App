@@ -44,14 +44,26 @@ public class MainActivity extends AppCompatActivity {
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                authenticateUser();
-                openBookingActivity();
-            }
+
+                if(!licenceInputText.getText().toString().equals("")) {
+                    authenticateUser();
+                    openBookingActivity();
+
+                }
+                else{
+                    Toast t2 = Toast.makeText(MainActivity.this,"PLEASE enter your licence number before continueing :)",Toast.LENGTH_SHORT);
+                    t2.show();
+                }
+                    }
         });
         showMatrixButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openMatrixActivity();
+                if(!licenceInputText.getText().toString().equals("")) openMatrixActivity();
+                else{
+                    Toast t2 = Toast.makeText(MainActivity.this,"PLEASE enter your licence number before continueing :)",Toast.LENGTH_SHORT);
+                    t2.show();
+                }
             }
         });
 
@@ -63,15 +75,21 @@ public class MainActivity extends AppCompatActivity {
     private void authenticateUser() {
         for(Pojoclasses.User user : usersStaticList ){
             if (user.licenceNumber.equals(licenceInputText.getText().toString())){
-                Toast.makeText(this,"Welcome Back! :)",Toast.LENGTH_LONG);
+                Toast t2 = Toast.makeText(this,"Welcome Back! :)",Toast.LENGTH_LONG);
+                t2.show();
                 currentUser = user;
+                return;
+
             }
+
         }
         Pojoclasses.User newUser = new Pojoclasses.User(licenceInputText.getText().toString());
         usersStaticList.add(newUser);
         currentUser = newUser;
         saveUserStaticLisToDatabase();
-        Toast.makeText(this,"Welcome New User! you have been added to the Database :)",Toast.LENGTH_LONG);
+        Toast t1 = Toast.makeText(this,"Welcome New User! you have been added to the Database :)",Toast.LENGTH_LONG);
+        t1.show();
+
     }
 
     private void saveUserStaticLisToDatabase() {
@@ -84,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
     private void populateSlotsArrayListFromDatabase(Date startdate) {
         //TODO
        if(startdate!=null){
-
-
-
 
        }else{
            String startDateString = "09/04/2020 09:00";
