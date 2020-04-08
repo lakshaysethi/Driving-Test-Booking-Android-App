@@ -1,12 +1,12 @@
 
 /* *
-* this file is for referensing backend functions only;
-* * */
+ * this file is for referensing backend functions only;
+ * * */
 
-package com.lakshaysethi.driverlicencetestbooking.backend;
+package test;
 
 import javax.swing.*;
-import java.text.DateFormat;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -21,7 +21,7 @@ public class Functions {
         User u1= createNewUser(licenceNumber);
         users.add(u1);
         String day = "2020/04/11";
-        String hour = "09:00";
+        int hour = 900;
         String startDateString = "2020/04/11 09:00";
         ArrayList<Slot> slotsList = openShop(startDateString);
 
@@ -85,7 +85,7 @@ public class Functions {
         return slotsList;
     }
 
-    private static void bookTimeSlot(User u1, String day, String hour) {
+    private static void bookTimeSlot(User u1, String day, int hour) {
         Slot selectedSlot = slot_available(day, hour);
         Booking newBooking = new Booking(selectedSlot);
         //CHECK LATER - need to chk if this user has already booked this slot then he can not book again
@@ -94,9 +94,20 @@ public class Functions {
 
 
     }
-    private static Slot slot_available(String day, String hour) {
+    private static Slot slot_available(String day, int hour) {
+        String hourString = Integer.toString(hour);
 
-        String correctString = day + " "+ hour;
+        if(hour<959){
+            hourString = "0"+hourString;
+            hourString = hourString.substring(0, 2) + ":" + hourString.substring(2, hourString.length());
+            System.out.println(hourString);
+
+        }else{
+            hourString = hourString.substring(0, 2) + ":" + hourString.substring(2, hourString.length());
+        }
+
+
+        String correctString = day + " "+ hourString;
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm");
         Date dateToCheck =  null;
