@@ -2,6 +2,7 @@ package com.lakshaysethi.driverlicencetestbooking;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,22 +10,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
 public class MainActivity extends AppCompatActivity {
-
-    public static ArrayList<Pojoclasses.Slot> slotsList= new ArrayList<Pojoclasses.Slot>();
-    public static ArrayList<Pojoclasses.User> usersStaticList = new ArrayList<Pojoclasses.User>();
 
     private Button continueButton;
     private Button showMatrixButton;
     private Button viewMyBookingsButton;
     private Button adminViewButton;
     private EditText licenceInputText;
+    Controller controllerObj = new Controller();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //read from data base and make static
-        populateUsersArrayListFromDatabase();
-        populateSlotsArrayListFromDatabase(null);
 
         //get reference to the widgets on the screen
         licenceInputText = findViewById(R.id.licenceInput);
@@ -43,46 +34,65 @@ public class MainActivity extends AppCompatActivity {
         adminViewButton = (Button) findViewById(R.id.adminViewButton);
 
 
-        continueButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { if( authenticateUser()!=null){
-                       openBookingActivity();
 
-                   } }
-        });
-        showMatrixButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if( authenticateUser()!=null){openMatrixActivity();
+            continueButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(welcomeUser()){
+                        openBookingActivity();
+                    }else{
+                        showToast(MainActivity.this,"Please Enter a Licence Number");
+                    }
+                }
+            });
 
-            }
 
-        adminViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { if( authenticateUser()!=null){
-                openBookingActivity();
+            showMatrixButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { {openMatrixActivity();} }
+            });
+            viewMyBookingsButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { {openViewMyBookingsActivity();} }
+            });
+            adminViewButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) { { openAdminActivity();} }
+            });
 
-            } }
-        });
-        viewMyBookingsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { if( authenticateUser()!=null){
-                openViewMyBookingsActivity();
+        }
 
-            } }
-        });
-        adminViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { if( authenticateUser()!=null){
-                openAdminActivity();
 
-            } }
-        });
+public boolean welcomeUser(){
+    if(licenceInputText.getText().toString().equals("")){
+        return false;
+    }
+        Pojoclasses.User u1 = controllerObj.getCurrentUser(licenceInputText.getText().toString());
 
+    if(u1!=null){
+
+        if (Controller.usersStaticList.contains(u1)) {
+            //ofcourse it is inside the static list  you just put it there 
+            showToast(this,"Welcome Back! :)");
+        }else{
+            showToast(this,"Welcome New User! you have been added to the Database :)");
+        }
+        return true;
+    }
+    return false;
+}
+
+    private void showToast(Context c, String s) {
+        Toast t1 = Toast.makeText(c,s,Toast.LENGTH_SHORT);
+        t1.show();
     }
 
-    private void openAdminActivity() {
 
+    private void openAdminActivity() {
+        //TODO
+        Intent intent = new Intent(this,ViewMyBookingsActivity.class);
+        //intent.putExtra("licenceNumber",licenceString);
+        startActivity(intent);
     }
 
     private void openViewMyBookingsActivity() {
@@ -102,6 +112,9 @@ public class MainActivity extends AppCompatActivity {
         //intent.putExtra("licenceNumber",licenceString);
         startActivity(intent);
     }
+
+
+
 
 
 }
