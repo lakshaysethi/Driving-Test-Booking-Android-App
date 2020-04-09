@@ -6,15 +6,16 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
+import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.User;
+import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.Slot;
 import java.util.Calendar;
 import java.util.Date;
 
 public class Controller {
     //available everywhere
-    public final static ArrayList<Pojoclasses.Slot> slotsList = new ArrayList<Pojoclasses.Slot>();
-    public final static ArrayList<Pojoclasses.User> usersList = new ArrayList<Pojoclasses.User>();
-    public static Pojoclasses.User currentUser;
+    public final static ArrayList<Slot> slotsList = new ArrayList<Slot>();
+    public final static ArrayList<User> usersList = new ArrayList<User>();
+    public static User currentUser;
 
 
     //constructor
@@ -25,9 +26,9 @@ public class Controller {
 
 //Important Functions below
 
-    public  Pojoclasses.User getCurrentUser(String licenceNumber) {
+    public  User getCurrentUser(String licenceNumber) {
         if(!licenceNumber.equals("")) {
-            for(Pojoclasses.User user : usersList){
+            for(User user : usersList){
                 if (user.licenceNumber.equals(licenceNumber)){
                     currentUser = user;
                     return user;
@@ -37,10 +38,10 @@ public class Controller {
         return currentUser;
     }
 
-    public  Pojoclasses.User addNewUser(String licenceNumber) {
+    public  User addNewUser(String licenceNumber) {
 
         if(!licenceNumber.equals("")) {
-            Pojoclasses.User newUser = new Pojoclasses.User(licenceNumber);
+            User newUser = new User(licenceNumber);
             usersList.add(newUser);
             currentUser = newUser;
             //saveUserStaticLisToDatabase();
@@ -52,7 +53,7 @@ public class Controller {
         return null;
     }
 
-    public ArrayList<Pojoclasses.Slot> getTimeslotBooking(String licenceNumber){
+    public ArrayList<Slot> getTimeslotBooking(String licenceNumber){
 
         return null;
     }
@@ -61,28 +62,30 @@ public class Controller {
         /*
         * what this function does:
         * 1.checks if the licence number given to this fn is not "" if it is then return false
-        * 2.it finds the user from the licenceNumber and
+        * 2.it gets the user from licenceNumber and
         *   2.5. sets this user as the currentUser        *
         * 3.it finds the Slot from the slots list using the day and the time;
-        * 4.it creates a new booking Object using the Slot and adds this booking object to User
-        * 5. it returns true then
+        * 4.checks if user should be allowed to book
+        * 5.it creates a new booking Object using the Slot and adds this booking object to User
+        * 6.it returns true then
         * */
         //check licence
         if(!licenceNumber.equals("")) {
-            Pojoclasses.User u1 = getUserFromList(licenceNumber);
+            User u1 = getOrCreateUser(licenceNumber);
             currentUser = u1;
-            Pojoclasses.Slot s1 = getSlot(day,hour);
+            Slot s1 = getSlot(day,hour);
+
         }
         return false;
 
     }
 
-    private Pojoclasses.Slot getSlot(String day, int hour) {
+    private Slot getSlot(String day, int hour) {
 
         Date d1 = parseInputDateAndTime( day, hour);
-        Pojoclasses.Slot s1 = new Pojoclasses.Slot(d1);
+        Slot s1 = new Slot(d1);
 
-        for(Pojoclasses.Slot s2: slotsList){
+        for(Slot s2: slotsList){
             if(s2.equals(s1)){
                 return s1;
             }
@@ -120,14 +123,16 @@ public class Controller {
         return hourString;
     }
 
-    public Pojoclasses.User getUserFromList(String licenceNumber){
-        for(Pojoclasses.User user: usersList) {
+    public User getOrCreateUser(String licenceNumber){
+        for(User user: usersList) {
             if (user.licenceNumber.equals(licenceNumber)) {
                 return user;
             }
         }
-        //returns null if user not found in the UserStatic Array List
-        return null;
+        User u1 = new User(licenceNumber);
+        usersList.add(u1);
+        return u1;
+
     }
 
     public void showToast(Context c, String s) {
@@ -136,14 +141,14 @@ public class Controller {
     }
 
     public boolean isOldUser(String licenceNumber) {
-        if(getUserFromList(licenceNumber)!=null){
+        if(getOrCreateUser(licenceNumber)!=null){
             return true;
         }
         return false;
     }
 
     public boolean setCurrentUser(String licenceNumber) {
-        currentUser = getUserFromList(licenceNumber);
+        currentUser = getOrCreateUser(licenceNumber);
         return currentUser != null;
     }
 
@@ -171,7 +176,7 @@ public class Controller {
             } else {
                 dateForSlot = cal.getTime();
                 for (int j = 0; j < 8; j++) {//8 slots each day
-                    slotsList.add(new Pojoclasses.Slot(dateForSlot));
+                    slotsList.add(new Slot(dateForSlot));
                     // long millis = date.getTime();
 //                   cal.setTime(dateForSlot); // sets calendar time/date
                     cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
