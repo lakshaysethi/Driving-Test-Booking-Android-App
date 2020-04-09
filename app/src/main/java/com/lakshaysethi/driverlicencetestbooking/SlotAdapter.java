@@ -6,14 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import com.lakshaysethi.driverlicencetestbooking.BookSlot;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-
-import static com.lakshaysethi.driverlicencetestbooking.MainActivity.currentUser;
 
 public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder> {
 
@@ -51,10 +48,10 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
         holder.matrixBookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Pojoclasses.User u1 = currentUser;
+                Pojoclasses.User u1 = Controller.currentUser;
                 String day = holder.selectedSlot.getDate();
                 int hour = holder.selectedSlot.getTimeInInt();
-                newBSObject.bookTimeSlot( u1,  day,  hour);
+                //newBSObject.bookTimeSlot( u1,  day,  hour);
                 onBindViewHolder( holder,  position);
             }
         });

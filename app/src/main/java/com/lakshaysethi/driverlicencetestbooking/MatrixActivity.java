@@ -17,7 +17,7 @@ public class MatrixActivity extends AppCompatActivity {
         setContentView(R.layout.activity_matrix);
         dateRecyclerView = (RecyclerView) findViewById(R.id.dateRecyclerView);
         dateRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        dateRecyclerView.setAdapter(new SlotAdapter(MainActivity.slotsList,this));
+        dateRecyclerView.setAdapter(new SlotAdapter(Controller.slotsList,this));
 
     }
 }
