@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.MotionEvent;
 
 import java.util.ArrayList;
 
@@ -36,17 +38,26 @@ public class MatrixActivity extends AppCompatActivity {
         rViewArrayList.add(date3RecyclerView);
         rViewArrayList.add(date4RecyclerView);
         rViewArrayList.add(date5RecyclerView);
+
+        rvLdates = (RecyclerView) findViewById(R.id.date6RecyclerView);
+        rvLdates.setLayoutManager(new LinearLayoutManager(this));
+        rvLdates.setAdapter(new SlotAdapter(getArrayListOfUniqueDates(Controller.slotsList),this,R.layout.date_and_day_view));
+
         int count = 0;
         for(RecyclerView rv : rViewArrayList ){
             rv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-            ArrayList<Pojoclasses.Slot> tmp = new ArrayList<Pojoclasses.Slot>(Controller.slotsList.subList(count,count+4));
+            ArrayList<Pojoclasses.Slot> tmp = new ArrayList<Pojoclasses.Slot>(Controller.slotsList.subList(count,count+8));
             rv.setAdapter(new SlotAdapter(tmp,this,R.layout.slot_button));
-            count +=5;
-        }
-        rvLdates = (RecyclerView) findViewById(R.id.date6RecyclerView);
-        rvLdates.setLayoutManager(new LinearLayoutManager(this));
 
-        rvLdates.setAdapter(new SlotAdapter(getArrayListOfUniqueDates(Controller.slotsList),this,R.layout.date_and_day_view));
+            DisplayMetrics displayMetrics = new DisplayMetrics();
+            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+            int width = displayMetrics.widthPixels;
+
+            rv.setMinimumWidth(width-rvLdates.getWidth());
+            System.out.println("width of the recycler"+rv.getWidth());
+            (new Controller()).showToast(this,"width of the recycler"+rv.getWidth());
+            count +=8;
+        }
     }
 
     private ArrayList<Pojoclasses.Slot> getArrayListOfUniqueDates(ArrayList<Pojoclasses.Slot> slotsList) {

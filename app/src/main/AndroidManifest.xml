@@ -11,7 +11,11 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AdminViewActivity"></activity>
         <activity android:name=".ViewMyBookingsActivity" />
-        <activity android:name=".MatrixActivity" />
+        <activity android:name=".MatrixActivity"
+            android:screenOrientation="portrait"
+            >
+
+        </activity>
         <activity android:name=".BookSlotActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
