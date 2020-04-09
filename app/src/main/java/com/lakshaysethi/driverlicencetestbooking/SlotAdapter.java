@@ -16,45 +16,75 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
 
     ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList;
     Context context;
+    Object layout;
+    Controller newBSObject = new Controller();
 
-
-    public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context) {
+//constructor
+    public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context, Object layout) {
         this.slotAdapterSlotArrayList = slotAdapterSlotArrayList;
         this.context = context;
+        this.layout = layout;
     }
 
+
+// Layout setter/ view creater
     @NonNull
     @Override
     public SlotViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater li = LayoutInflater.from(parent.getContext());
-        View view = li.inflate(R.layout.slot_button,parent,false);
+        View view = li.inflate((Integer) layout,parent,false);
         SlotViewHolder newSlotViewHolder = new SlotViewHolder(view);
 
 
         return newSlotViewHolder;
     }
-
+// main method
     @Override
     public void onBindViewHolder(@NonNull final SlotViewHolder holder, final int position) {
-        final TextView availableInstructorsTextView= holder.availableInstructorsTextView;
+        if (holder.workingon==1){
+            holder.dateAndDayTextView.setText("\n\nDate:   14/04/2020  \n\nDay:     Thursday\n\n\n");
+        }else if(holder.workingon ==2){
+            holder.availableInstructorsTextView.setText("Available Instructors: "+Integer.toString(slotAdapterSlotArrayList.get(position).remainingTimes));
+            holder.timeTextView.setText("Time: " + slotAdapterSlotArrayList.get(position).getTime() + " 1 Hr");
+            final Pojoclasses.Slot tempSlot = slotAdapterSlotArrayList.get(position);
+            holder.matrixBookButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String u1Licence = Controller.currentUser.licenceNumber;
+                    String day = tempSlot.getDate();
 
-        final TextView timeTextView= holder.timeTextView;
+                    int hour = tempSlot.getTimeInInt();
 
+                    newBSObject.bookTimeSlot( u1Licence,  day,  hour);
+                    onBindViewHolder( holder,  position);
 
+                }
+            });
 
-        holder.availableInstructorsTextView.setText("Available Instructors: "+Integer.toString(slotAdapterSlotArrayList.get(position).remainingTimes));
-        holder.timeTextView.setText("Time: " + slotAdapterSlotArrayList.get(position).getTime() + " 1 Hr");
-        holder.selectedSlot =slotAdapterSlotArrayList.get(position);
-        holder.matrixBookButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Pojoclasses.User u1 = Controller.currentUser;
-                String day = holder.selectedSlot.getDate();
-                int hour = holder.selectedSlot.getTimeInInt();
-                //newBSObject.bookTimeSlot( u1,  day,  hour);
-                onBindViewHolder( holder,  position);
+        }
+
+    }
+
+    public static class SlotViewHolder extends RecyclerView.ViewHolder{
+        public final int workingon;
+        TextView timeTextView;
+        TextView availableInstructorsTextView;
+        Button matrixBookButton;
+        TextView dateAndDayTextView;
+
+        public SlotViewHolder(@NonNull View itemView) {
+            super(itemView);
+            timeTextView = (TextView) itemView.findViewById(R.id.slotTimeTextView);
+            if(timeTextView==null){
+                workingon = 1;//working on date and Day
+                dateAndDayTextView =(TextView)itemView.findViewById(R.id.dateAndTimeTextView);
+            }else{
+                workingon = 2;
+                availableInstructorsTextView = (TextView) itemView.findViewById(R.id.slotRemainingTextView);
+                matrixBookButton = (Button) itemView.findViewById(R.id.matrixBookButton);
             }
-        });
+
+        }
     }
 
     @Override
@@ -63,18 +93,5 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
         return slotAdapterSlotArrayList.size();
     }
 
-    public static class SlotViewHolder extends RecyclerView.ViewHolder{
-        TextView timeTextView;
-        TextView availableInstructorsTextView;
-        Button matrixBookButton;
-        Pojoclasses.Slot selectedSlot;
 
-        public SlotViewHolder(@NonNull View itemView) {
-            super(itemView);
-            timeTextView = (TextView) itemView.findViewById(R.id.slotTimeTextView);
-            availableInstructorsTextView = (TextView) itemView.findViewById(R.id.slotRemainingTextView);
-            matrixBookButton = (Button) itemView.findViewById(R.id.matrixBookButton);
-            selectedSlot = null;
-        }
-    }
 }
