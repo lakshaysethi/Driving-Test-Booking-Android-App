@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button continueButton;
     private Button showMatrixButton;
+    private Button viewMyBookingsButton;
+    private Button adminViewButton;
     private EditText licenceInputText;
 
     @Override
@@ -39,22 +41,16 @@ public class MainActivity extends AppCompatActivity {
         licenceInputText = findViewById(R.id.licenceInput);
         continueButton =(Button) findViewById(R.id.continueButton);
         showMatrixButton = (Button) findViewById(R.id.showMatrixButton);
+        viewMyBookingsButton =(Button) findViewById(R.id.viewMyBookingsButton);
+        adminViewButton = (Button) findViewById(R.id.adminViewButton);
 
 
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) { if( authenticateUser()!=null){
+                       openBookingActivity();
 
-                if(!licenceInputText.getText().toString().equals("")) {
-                    authenticateUser();
-                    openBookingActivity();
-
-                }
-                else{
-                    Toast t2 = Toast.makeText(MainActivity.this,"PLEASE enter your licence number before continueing :)",Toast.LENGTH_SHORT);
-                    t2.show();
-                }
-                    }
+                   } }
         });
         showMatrixButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,36 +62,75 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        adminViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { if( authenticateUser()!=null){
+                openBookingActivity();
 
+            } }
+        });
+        viewMyBookingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { if( authenticateUser()!=null){
+                openViewMyBookingsActivity();
+
+            } }
+        });
+
+    }
+
+    private void openViewMyBookingsActivity() {
 
     }
 
 
     //Important Functions below
-    private void authenticateUser() {
-        for(Pojoclasses.User user : usersStaticList ){
-            if (user.licenceNumber.equals(licenceInputText.getText().toString())){
-                Toast t2 = Toast.makeText(this,"Welcome Back! :)",Toast.LENGTH_LONG);
-                t2.show();
-                currentUser = user;
-                return;
+    private Pojoclasses.User authenticateUser() {
+
+        if(!licenceInputText.getText().toString().equals("")) {
+            for(Pojoclasses.User user : usersStaticList ){
+                if (user.licenceNumber.equals(licenceInputText.getText().toString())){
+                    Toast t2 = Toast.makeText(this,"Welcome Back! :)",Toast.LENGTH_LONG);
+                    t2.show();
+                    currentUser = user;
+                    return user;
+
+                }
 
             }
-
+            Pojoclasses.User newUser = new Pojoclasses.User(licenceInputText.getText().toString());
+            usersStaticList.add(newUser);
+            currentUser = newUser;
+            saveUserStaticLisToDatabase();
+            Toast t1 = Toast.makeText(this,"Welcome New User! you have been added to the Database :)",Toast.LENGTH_LONG);
+            t1.show();
+            return newUser;
         }
-        Pojoclasses.User newUser = new Pojoclasses.User(licenceInputText.getText().toString());
-        usersStaticList.add(newUser);
-        currentUser = newUser;
-        saveUserStaticLisToDatabase();
-        Toast t1 = Toast.makeText(this,"Welcome New User! you have been added to the Database :)",Toast.LENGTH_LONG);
-        t1.show();
+        else{
+            Toast t2 = Toast.makeText(MainActivity.this,"PLEASE enter your licence number before continueing :)",Toast.LENGTH_SHORT);
+            t2.show();
+        }
 
+        return null;
     }
 
     private void saveUserStaticLisToDatabase() {
         //TODO
     }
 
+    public ArrayList<Pojoclasses.Slot> getTimeslotBooking(String licenceNumber){
+            Pojoclasses.User u1 = authenticateUser();
+            if (u1!=null && u1.licenceNumber.equals(licenceNumber) && !u1.bookingsList.isEmpty()){
+                ArrayList<Pojoclasses.Slot> sl = new ArrayList<Pojoclasses.Slot>();
+                for(Pojoclasses.Booking booking:u1.bookingsList){
+                    sl.add(booking.slot);
+                }
+                return sl;
+
+            }
+
+            return null;
+    }
 
 
 

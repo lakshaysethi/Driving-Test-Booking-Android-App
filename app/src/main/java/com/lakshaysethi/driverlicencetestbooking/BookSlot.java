@@ -33,7 +33,7 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
 
 
     private Button bookButton;
-    private Spinner bookingDateSpinner;
+   // private Spinner bookingDateSpinner;
     private Spinner bookingSlotSpinner;
     private TextView licenceNumberTextView;
     private static Slot selectedSlot;
@@ -45,13 +45,13 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
 
 
         bookButton = (Button) findViewById(R.id.bookButton);
-        bookingDateSpinner = (Spinner) findViewById(R.id.dateSpinner);
+        //bookingDateSpinner = (Spinner) findViewById(R.id.dateSpinner);
         bookingSlotSpinner = (Spinner) findViewById(R.id.slotSpinner);
         licenceNumberTextView = (TextView) findViewById(R.id.licenceTextView);
 
 
         //set the licence number on this screen:
-        licenceNumberTextView.setText(MainActivity.currentUser.licenceNumber);
+        licenceNumberTextView.setText("Licence # " +MainActivity.currentUser.licenceNumber);
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +63,7 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
                     Toast t1= Toast.makeText(BookSlot.this,"Booked Successfully",Toast.LENGTH_LONG);
                     t1.show();
                 }else{
-                    Toast t1= Toast.makeText(BookSlot.this,"Booking Failed Successfully",Toast.LENGTH_LONG);
+                    Toast t1= Toast.makeText(BookSlot.this,"Booking Failed",Toast.LENGTH_LONG);
                     t1.show();
                 }
             }
@@ -81,7 +81,7 @@ public class BookSlot extends AppCompatActivity {//implements AdapterView.OnItem
 
 
 
-    public static boolean bookTimeSlot(User u1, String day, int hour) {
+    public  boolean bookTimeSlot(User u1, String day, int hour) {
         try {
 
             if (userHasMoreThanTwoBookings(selectedSlot)) {

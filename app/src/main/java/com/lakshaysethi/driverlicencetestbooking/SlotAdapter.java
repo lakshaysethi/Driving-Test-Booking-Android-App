@@ -19,7 +19,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
 
     ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList;
     Context context;
-
+    BookSlot newBSObject = new BookSlot();
 
     public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context) {
         this.slotAdapterSlotArrayList = slotAdapterSlotArrayList;
@@ -54,7 +54,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
                 Pojoclasses.User u1 = currentUser;
                 String day = holder.selectedSlot.getDate();
                 int hour = holder.selectedSlot.getTimeInInt();
-                BookSlot.bookTimeSlot( u1,  day,  hour);
+                newBSObject.bookTimeSlot( u1,  day,  hour);
                 onBindViewHolder( holder,  position);
             }
         });

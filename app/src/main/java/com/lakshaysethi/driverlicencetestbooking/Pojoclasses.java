@@ -16,7 +16,7 @@ public class Pojoclasses {
         public String toString() {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             String dateString = sdf.format(date);
-            return "date and time: " + dateString;
+            return  dateString;
         }
 
         public Slot(Date date) {
