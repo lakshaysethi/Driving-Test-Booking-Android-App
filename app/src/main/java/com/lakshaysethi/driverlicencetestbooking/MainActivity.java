@@ -76,11 +76,24 @@ public class MainActivity extends AppCompatActivity {
 
             } }
         });
+        adminViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { if( authenticateUser()!=null){
+                openAdminActivity();
+
+            } }
+        });
 
     }
 
-    private void openViewMyBookingsActivity() {
+    private void openAdminActivity() {
+        
+    }
 
+    private void openViewMyBookingsActivity() {
+        Intent intent = new Intent(this,ViewMyBookingsActivity.class);
+        //intent.putExtra("licenceNumber",licenceString);
+        startActivity(intent);
     }
 
 
