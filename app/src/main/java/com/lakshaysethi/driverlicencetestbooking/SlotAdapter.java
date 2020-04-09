@@ -52,17 +52,13 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
                 public void onClick(View v) {
                     String u1Licence = Controller.currentUser.licenceNumber;
                     String day = tempSlot.getDateString();
-
                     int hour = tempSlot.getTimeInInt();
-
                     newBSObject.bookTimeSlot( u1Licence,  day,  hour);
                     onBindViewHolder( holder,  position);
 
                 }
             });
-
         }
-
     }
 
     public static class SlotViewHolder extends RecyclerView.ViewHolder{
