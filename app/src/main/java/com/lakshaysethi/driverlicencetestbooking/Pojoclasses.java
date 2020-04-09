@@ -65,10 +65,17 @@ public class Pojoclasses {
             this.licenceNumber = licenceNumber;
             this.bookingsList = new ArrayList<Booking>();
         }
-        public boolean hasMoreThanTwoBookings(Slot s1) {
+        public ArrayList<Slot> getAllSlots(){
+            ArrayList<Slot> al = new ArrayList<Slot>();
+            for(Booking b1:this.bookingsList){
+                al.add(b1.slot);
+            }
+            return al;
+        }
+        public boolean hasMoreThanTwoBookingsForAday(Slot s1) {
             int count=0;
             for (Pojoclasses.Booking booking : this.bookingsList){
-                    if(s1.equals(booking.slot)){
+                    if(s1.getDateString().equals(booking.slot.getDateString())){
                         count++;
                     }
             }
@@ -83,9 +90,9 @@ public class Pojoclasses {
         public String toString(){
             String bookingsString ="";
             for(Booking bookingObj:this.bookingsList){
-                bookingsString += bookingObj.toString() +"\n";
+                bookingsString += bookingObj.toString() +"\n\n";
             }
-            return "Bookings for #"+ this.licenceNumber + "\n\n\n" + bookingsString;
+            return "Bookings for "+ this.licenceNumber + "\n\n\n" + bookingsString;
         }
     }
 
@@ -95,7 +102,7 @@ public class Pojoclasses {
 
         public Booking(Slot slot) {
             this.slot = slot;
-            this.refNo = "#" + UUID.randomUUID().toString();//+ " "+ this.slot.toString();
+            this.refNo = "#" + UUID.randomUUID().toString().substring(0,12);//+ " "+ this.slot.toString();
         }
         @Override
         public String toString(){

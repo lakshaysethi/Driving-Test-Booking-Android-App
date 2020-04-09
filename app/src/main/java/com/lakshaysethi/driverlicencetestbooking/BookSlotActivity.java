@@ -40,7 +40,7 @@ public class BookSlotActivity extends AppCompatActivity {
 
 
 
-        licenceNumberTextView.setText("Licence # " +Controller.currentUser.licenceNumber);
+        licenceNumberTextView.setText("Licence # " +Controller.licenceNumber);
 
         viewMyBookingsButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,7 +17,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
     ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList;
     Context context;
     Object layout;
-    Controller newBSObject = new Controller();
+    Controller controller = new Controller();
 
 //constructor
     public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context, Object layout) {
@@ -50,10 +50,15 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
             holder.matrixBookButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String u1Licence = Controller.currentUser.licenceNumber;
+                    String u1Licence = Controller.licenceNumber;
                     String day = tempSlot.getDateString();
                     int hour = tempSlot.getTimeInInt();
-                    newBSObject.bookTimeSlot( u1Licence,  day,  hour);
+                    if(controller.bookTimeSlot( u1Licence,  day,  hour)){
+
+                        controller.showToast(v.getContext(),"Booked Successfully");
+                    }else{
+                        controller.showToast(v.getContext(),"Booking Failed- do you have more than 2 bookings for the same day?");
+                    }
                     onBindViewHolder( holder,  position);
 
                 }

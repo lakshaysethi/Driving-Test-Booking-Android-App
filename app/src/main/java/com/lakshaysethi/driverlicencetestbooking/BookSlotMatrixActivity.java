@@ -4,13 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MatrixActivity extends AppCompatActivity {
+public class BookSlotMatrixActivity extends AppCompatActivity {
 
 
 
@@ -21,13 +23,17 @@ public class MatrixActivity extends AppCompatActivity {
     RecyclerView date5RecyclerView;
     RecyclerView rvLdates;
 
+    private TextView licenceNumberTextView;
+    private Button viewMyBookingsButton;
+
+
     ArrayList<RecyclerView> rViewArrayList = new ArrayList<RecyclerView>();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_matrix);
+        setContentView(R.layout.activity_book_slot_matrix);
         date1RecyclerView= (RecyclerView) findViewById(R.id.dateRecyclerView);
         date2RecyclerView= (RecyclerView) findViewById(R.id.date2RecyclerView);
         date3RecyclerView= (RecyclerView) findViewById(R.id.date3RecyclerView);
@@ -51,6 +57,19 @@ public class MatrixActivity extends AppCompatActivity {
             rv.setAdapter(new SlotAdapter(tmp,this,R.layout.slot_button));
             count +=8;
         }
+
+
+        licenceNumberTextView = (TextView) findViewById(R.id.licenceTextView2);
+        viewMyBookingsButton =(Button) findViewById(R.id.viewMyBookingsButton2);
+
+        licenceNumberTextView.setText("Licence # " +Controller.licenceNumber);
+
+        viewMyBookingsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { {openViewMyBookingsActivity();} }
+        });
+
+
     }
 
     private ArrayList<Pojoclasses.Slot> getArrayListOfUniqueDates(ArrayList<Pojoclasses.Slot> slotsList) {
@@ -62,5 +81,11 @@ public class MatrixActivity extends AppCompatActivity {
         }
         return  al;
 
+    }
+
+    private void openViewMyBookingsActivity() {
+        Intent intent = new Intent(this,ViewMyBookingsActivity.class);
+        //intent.putExtra("licenceNumber",licenceString);
+        startActivity(intent);
     }
 }

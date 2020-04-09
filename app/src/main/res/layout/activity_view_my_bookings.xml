@@ -6,14 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ViewMyBookingsActivity">
 
-    <EditText
-        android:id="@+id/myMultiLineTextView"
+    <TextView
+        android:id="@+id/myBookingsTextView"
+        style="@android:style/Widget.EditText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ems="10"
+
         android:gravity="start|top"
         android:inputType="textMultiLine"
         android:text="my bookings "
+        android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

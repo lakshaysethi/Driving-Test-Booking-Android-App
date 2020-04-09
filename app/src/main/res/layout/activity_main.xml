@@ -75,6 +75,7 @@
         android:id="@+id/adminViewButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="View Bookings of all Users"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -85,10 +86,10 @@
         tools:text="View Bookings by all Users" />
 
     <Button
-        android:id="@+id/showMatrixButton"
+        android:id="@+id/showAllBookingsMatrixActivityBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Availability matrix"
+        android:text="View ALL Bookings Matrix"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
