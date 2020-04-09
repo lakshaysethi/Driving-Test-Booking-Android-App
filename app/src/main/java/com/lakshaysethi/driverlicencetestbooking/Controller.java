@@ -13,9 +13,9 @@ import java.util.Date;
 
 public class Controller {
     //available everywhere
-    public final static ArrayList<Slot> slotsList = new ArrayList<Slot>();
+    public final static ArrayList<Slot> slotsList = new ArrayList<Slot>();//this class populates and keeps all the slots
     public final static ArrayList<User> usersList = new ArrayList<User>();
-    public static User currentUser;
+    public static String licenceNumber;
 
 
     //constructor
@@ -26,32 +26,7 @@ public class Controller {
 
 //Important Functions below
 
-    public  User getCurrentUser(String licenceNumber) {
-        if(!licenceNumber.equals("")) {
-            for(User user : usersList){
-                if (user.licenceNumber.equals(licenceNumber)){
-                    currentUser = user;
-                    return user;
-                }
-            }
-        }
-        return currentUser;
-    }
 
-    public  User addNewUser(String licenceNumber) {
-
-        if(!licenceNumber.equals("")) {
-            User newUser = new User(licenceNumber);
-            usersList.add(newUser);
-            currentUser = newUser;
-            //saveUserStaticLisToDatabase();
-            System.out.println("Added user with Licence #"+ newUser.licenceNumber);
-            return newUser;
-
-            }
-        System.out.println("add user failed - is the licenceNumber entered?");
-        return null;
-    }
 
     public ArrayList<Slot> getTimeslotBooking(String licenceNumber){
 
@@ -72,7 +47,7 @@ public class Controller {
         //check licence
         if(!licenceNumber.equals("")) {
             User u1 = getOrCreateUser(licenceNumber);
-            currentUser = u1;
+
             Slot s1 = getSlot(day,hour);
 
         }
@@ -140,17 +115,6 @@ public class Controller {
         t1.show();
     }
 
-    public boolean isOldUser(String licenceNumber) {
-        if(getOrCreateUser(licenceNumber)!=null){
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setCurrentUser(String licenceNumber) {
-        currentUser = getOrCreateUser(licenceNumber);
-        return currentUser != null;
-    }
 
     public void populateSlotsArrayList() {
 
@@ -188,4 +152,6 @@ public class Controller {
             }
         }
     }
+
+
 }
