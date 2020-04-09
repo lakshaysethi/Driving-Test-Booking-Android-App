@@ -7,72 +7,56 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
-        android:textSize="24dp"
         android:id="@+id/licenceTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="156dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text=""
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/bookButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="124dp"
-        android:layout_marginEnd="44dp"
-        android:text="Date :"
-        android:textSize="17dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/dateSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/licenceTextView" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="48dp"
-        android:text="Slot :"
-        android:textSize="17dp"
-        android:textStyle="bold"
-
-        app:layout_constraintEnd_toStartOf="@+id/slotSpinner"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002" />
 
     <Spinner
         android:id="@+id/slotSpinner"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="52dp"
+        app:layout_constraintBottom_toTopOf="@+id/bookButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateSpinner" />
-
-    <Spinner
-        android:id="@+id/dateSpinner"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:layout_marginEnd="52dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/licenceTextView" />
 
     <Button
         android:id="@+id/bookButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:layout_marginEnd="160dp"
+        android:layout_marginTop="396dp"
+        android:layout_marginBottom="328dp"
         android:text="Book"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slotSpinner" />
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/licenceTextView" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="Slot :"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/bookButton"
+        app:layout_constraintEnd_toStartOf="@+id/slotSpinner"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/licenceTextView"
+        app:layout_constraintVertical_bias="0.496" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
