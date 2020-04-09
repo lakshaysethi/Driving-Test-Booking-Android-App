@@ -21,9 +21,9 @@ public class Controller {
     public Controller() { }
 
 
+
+
 //Important Functions below
-
-
 
     public  Pojoclasses.User getCurrentUser(String licenceNumber) {
         if(!licenceNumber.equals("")) {
@@ -146,9 +146,6 @@ public class Controller {
         currentUser = getUserFromList(licenceNumber);
         return currentUser != null;
     }
-
-
-
 
     public void populateSlotsArrayList() {
 

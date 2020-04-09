@@ -12,7 +12,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Button continueButton;
     private Button showMatrixButton;
-
     private Button adminViewButton;
     private EditText licenceInputText;
     Controller controllerObj = new Controller();
@@ -60,8 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-public boolean checkLicenceAndWelcomeUser(String licenceNumber) {
+    public boolean checkLicenceAndWelcomeUser(String licenceNumber) {
 
         /*
         * what does this function do?
@@ -93,17 +91,12 @@ public boolean checkLicenceAndWelcomeUser(String licenceNumber) {
 
 }
 
-
-
-
     private void openAdminActivity() {
         //TODO
         Intent intent = new Intent(this,AdminViewActivity.class);
         //intent.putExtra("licenceNumber",licenceString);
         startActivity(intent);
     }
-
-
 
     private void openMatrixActivity() {
         Intent intent = new Intent(this,MatrixActivity.class);
