@@ -6,29 +6,25 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+
 import java.util.Calendar;
 import java.util.Date;
 
 public class Controller {
     //available everywhere
-    public  ArrayList<Pojoclasses.Slot> slotsList;
-    public  ArrayList<Pojoclasses.User> usersList;
-    public  Pojoclasses.User currentUser;
+    public final static ArrayList<Pojoclasses.Slot> slotsList = new ArrayList<Pojoclasses.Slot>();
+    public final static ArrayList<Pojoclasses.User> usersList = new ArrayList<Pojoclasses.User>();
+    public static Pojoclasses.User currentUser;
+
 
     //constructor
     public Controller() {
-        this.slotsList = new ArrayList<Pojoclasses.Slot>();
-        this.usersList = new ArrayList<Pojoclasses.User>();;
-        this.currentUser = new Pojoclasses.User("123");
-    }
+         }
 
 
 //Important Functions below
 
-    public void onMyAppStart(){
-        //populateSlotsArrayListFromDatabase();
-      //   populateUsersArrayListFromDatabase();
-    }
+
 
     public  Pojoclasses.User getCurrentUser(String licenceNumber) {
         if(!licenceNumber.equals("")) {
@@ -69,7 +65,7 @@ public class Controller {
 
 
 
-    private  Pojoclasses.Slot slot_available(String day, int hour) {
+    public   Pojoclasses.Slot slot_available(String day, int hour) {
         String hourString = Integer.toString(hour);
 
         if (hour < 959) {
@@ -104,7 +100,7 @@ public class Controller {
             }
         }
         System.out.println("returning Null");
-        //means slot is not available for the specific day 
+        //means slot is not available for the specific day
         return null;
     }
 
@@ -156,6 +152,46 @@ public class Controller {
             return false;
         }else{
             return true;
+        }
+    }
+
+
+
+
+    public void populateSlotsArrayList() {
+
+
+        String startDateString = "15/04/2020 09:00";
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date startDate = null;
+        try {
+            startDate = sdf.parse(startDateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date dateForSlot = startDate;
+        Calendar cal = Calendar.getInstance(); // creates calendar
+
+        for (int i = 0; i < 7; i++) {//days
+            cal.setTime(dateForSlot);
+            // sets calendar time/date
+            if (cal.get(Calendar.DAY_OF_WEEK) == 1 || cal.get(Calendar.DAY_OF_WEEK) == 7) {
+                cal.add(Calendar.DAY_OF_WEEK, 1); // adds day
+                dateForSlot = cal.getTime();
+            } else {
+                dateForSlot = cal.getTime();
+                for (int j = 0; j < 8; j++) {//8 slots each day
+                    slotsList.add(new Pojoclasses.Slot(dateForSlot));
+                    // long millis = date.getTime();
+//                   cal.setTime(dateForSlot); // sets calendar time/date
+                    cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
+                    dateForSlot = cal.getTime();
+
+                }
+                cal.add(Calendar.HOUR_OF_DAY, 16);
+                dateForSlot = cal.getTime();
+            }
         }
     }
 }

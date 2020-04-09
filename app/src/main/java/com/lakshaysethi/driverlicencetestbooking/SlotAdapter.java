@@ -16,7 +16,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
 
     ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList;
     Context context;
-    BookSlot newBSObject = new BookSlot();
+
 
     public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context) {
         this.slotAdapterSlotArrayList = slotAdapterSlotArrayList;
