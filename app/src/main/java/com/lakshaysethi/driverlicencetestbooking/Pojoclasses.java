@@ -16,28 +16,26 @@ public class Pojoclasses {
         public String toString() {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             String dateString = sdf.format(date);
-            return  dateString;
+            return  dateString + this.remainingTimes +" left";
         }
-
         public Slot(Date date) {
             this.date = date;
             this.remainingTimes = 10;
 
         }
-
-        public String getDate() {
+        public String getDateString() {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            String dateString = sdf.format(date);
+            String dateString = sdf.format(this.date);
             return dateString;
         }
-        public String getTime() {
+        public String getTimeString() {
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            String dateString = sdf.format(date);
-            return dateString;
+            String timeString = sdf.format(this.date);
+            return timeString;
         }
         public int getTimeInInt(){
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-            String dateString = sdf.format(date);
+            String dateString = sdf.format(this.date);
             String[] arr =  dateString.split(":");
 
             int timeInt=900;
@@ -49,6 +47,14 @@ public class Pojoclasses {
             }
             return timeInt;
         }
+        public Boolean isAvailable() {
+            if (this.remainingTimes >= 1) {
+                return true;
+            }else{
+                return false;
+            }
+        }
+
     }
 
     public static class User {
@@ -58,9 +64,29 @@ public class Pojoclasses {
         public User(String licenceNumber) {
             this.licenceNumber = licenceNumber;
             this.bookingsList = new ArrayList<Booking>();
+        }
+        public boolean hasMoreThanTwoBookings(Slot s1) {
+            int count=0;
+            for (Pojoclasses.Booking booking : this.bookingsList){
+                    if(s1.equals(booking.slot)){
+                        count++;
+                    }
+            }
+            if(count>=2){
+                return true;
+            }
+            return false;
 
         }
 
+        @Override
+        public String toString(){
+            String bookingsString ="";
+            for(Booking bookingObj:this.bookingsList){
+                bookingsString += bookingObj.toString() +"\n";
+            }
+            return "Bookings for #"+ this.licenceNumber + "\n\n\n" + bookingsString;
+        }
     }
 
     public static class Booking {
@@ -70,6 +96,10 @@ public class Pojoclasses {
         public Booking(Slot slot) {
             this.slot = slot;
             this.refNo = "#" + UUID.randomUUID().toString();//+ " "+ this.slot.toString();
+        }
+        @Override
+        public String toString(){
+            return "Booking "+this.refNo+ "\n"+ this.slot.getDateString()+ " "+this.slot.getTimeString();
         }
     }
 

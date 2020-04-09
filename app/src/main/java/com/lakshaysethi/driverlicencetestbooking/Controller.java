@@ -57,71 +57,68 @@ public class Controller {
         return null;
     }
 
-    public  boolean bookTimeSlot(String licenceNumber, String day, int hour) {
-
+    public  boolean bookTimeSlot(String licenceNumber, String day, int hour) {//TODO
+        /*
+        * what this function does:
+        * 1.checks if the licence number given to this fn is not "" if it is then return false
+        * 2.it finds the user from the licenceNumber and
+        *   2.5. sets this user as the currentUser        *
+        * 3.it finds the Slot from the slots list using the day and the time;
+        * 4.it creates a new booking Object using the Slot and adds this booking object to User
+        * 5. it returns true then
+        * */
+        //check licence
+        if(!licenceNumber.equals("")) {
+            Pojoclasses.User u1 = getUserFromList(licenceNumber);
+            currentUser = u1;
+            Pojoclasses.Slot s1 = getSlot(day,hour);
+        }
         return false;
+
     }
 
+    private Pojoclasses.Slot getSlot(String day, int hour) {
+
+        Date d1 = parseInputDateAndTime( day, hour);
+        Pojoclasses.Slot s1 = new Pojoclasses.Slot(d1);
+
+        for(Pojoclasses.Slot s2: slotsList){
+            if(s2.equals(s1)){
+                return s1;
+            }
+        }
 
 
-    public   Pojoclasses.Slot slot_available(String day, int hour) {
+        return null;
+    }
+
+    public Date parseInputDateAndTime(String day,int hour){
+        String hourString = getStringHourFromInt(hour);
+        String correctString = day + " " + hourString;
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
+        Date d1 = null;
+        try {
+            d1 = sdf.parse(correctString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return d1;
+
+    }
+
+    public String getStringHourFromInt(int hour) {
         String hourString = Integer.toString(hour);
 
         if (hour < 959) {
             hourString = "0" + hourString;
             hourString = hourString.substring(0, 2) + ":" + hourString.substring(2, hourString.length());
-            //SEE SYSO
-            System.out.println(hourString);
-
         } else {
             hourString = hourString.substring(0, 2) + ":" + hourString.substring(2, hourString.length());
         }
-
-
-        String correctString = day + " " + hourString;
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        Date dateToCheck = null;
-        try {
-            dateToCheck = sdf.parse(correctString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-
-        for (int i = 0; i < slotsList.size(); i++) {
-            Pojoclasses.Slot testSlot = slotsList.get(i);
-            if (testSlot.date.equals(dateToCheck)) {
-                if (testSlot.remainingTimes >= 1) {
-
-                    return testSlot;
-                }
-            }
-        }
-        System.out.println("returning Null");
-        //means slot is not available for the specific day
-        return null;
+        return hourString;
     }
-
-
-
-    private  boolean userHasMoreThanTwoBookings(Pojoclasses.Slot selectedSlot) {
-        int count=0;
-        for (Pojoclasses.Booking booking : currentUser.bookingsList){
-            if (booking.slot.getDate().equals(selectedSlot.getDate())){
-                count++;
-                if(count>=2){
-                    return true;
-                }
-                count++;
-            }
-        }
-        return false;
-
-    }
-
-
-
 
     public Pojoclasses.User getUserFromList(String licenceNumber){
         for(Pojoclasses.User user: usersList) {
@@ -147,11 +144,7 @@ public class Controller {
 
     public boolean setCurrentUser(String licenceNumber) {
         currentUser = getUserFromList(licenceNumber);
-        if(currentUser.equals(null)){
-            return false;
-        }else{
-            return true;
-        }
+        return currentUser != null;
     }
 
 

@@ -41,21 +41,14 @@ public class MatrixActivity extends AppCompatActivity {
 
         rvLdates = (RecyclerView) findViewById(R.id.date6RecyclerView);
         rvLdates.setLayoutManager(new LinearLayoutManager(this));
-        rvLdates.setAdapter(new SlotAdapter(getArrayListOfUniqueDates(Controller.slotsList),this,R.layout.date_and_day_view));
+        ArrayList<Pojoclasses.Slot> al = getArrayListOfUniqueDates(Controller.slotsList);
+        rvLdates.setAdapter(new SlotAdapter(al,this,R.layout.date_and_day_view));
 
         int count = 0;
         for(RecyclerView rv : rViewArrayList ){
             rv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
             ArrayList<Pojoclasses.Slot> tmp = new ArrayList<Pojoclasses.Slot>(Controller.slotsList.subList(count,count+8));
             rv.setAdapter(new SlotAdapter(tmp,this,R.layout.slot_button));
-
-            DisplayMetrics displayMetrics = new DisplayMetrics();
-            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-            int width = displayMetrics.widthPixels;
-
-            rv.setMinimumWidth(width-rvLdates.getWidth());
-            System.out.println("width of the recycler"+rv.getWidth());
-            (new Controller()).showToast(this,"width of the recycler"+rv.getWidth());
             count +=8;
         }
     }

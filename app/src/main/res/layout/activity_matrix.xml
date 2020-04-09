@@ -27,7 +27,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/dateRecyclerView"
-                    android:layout_width="400dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="5dp"
@@ -37,7 +37,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/date2RecyclerView"
-                    android:layout_width="400dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:scrollbars="horizontal|vertical"
@@ -46,7 +46,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/date3RecyclerView"
-                    android:layout_width="400dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="5dp"
@@ -56,7 +56,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/date4RecyclerView"
-                    android:layout_width="400dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="5dp"
@@ -66,7 +66,7 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/date5RecyclerView"
-                    android:layout_width="400dp"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="5dp"
