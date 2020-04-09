@@ -18,8 +18,7 @@ public class Controller {
 
 
     //constructor
-    public Controller() {
-         }
+    public Controller() { }
 
 
 //Important Functions below

@@ -98,7 +98,7 @@ public boolean checkLicenceAndWelcomeUser(String licenceNumber) {
 
     private void openAdminActivity() {
         //TODO
-        Intent intent = new Intent(this,ViewMyBookingsActivity.class);
+        Intent intent = new Intent(this,AdminViewActivity.class);
         //intent.putExtra("licenceNumber",licenceString);
         startActivity(intent);
     }
