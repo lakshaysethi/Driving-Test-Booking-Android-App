@@ -1,5 +1,6 @@
 package com.lakshaysethi.driverlicencetestbooking;
 
+import android.content.Context;
 import android.widget.Toast;
 
 import java.text.ParseException;
@@ -10,94 +11,61 @@ import java.util.Date;
 
 public class Controller {
     //available everywhere
-    public static ArrayList<Pojoclasses.Slot> slotsList= new ArrayList<Pojoclasses.Slot>();//TODO make = function
-    public static ArrayList<Pojoclasses.User> usersStaticList = new ArrayList<Pojoclasses.User>();//TODO make = function
-    public static Pojoclasses.User currentUser;//Need to populate on click of main activity
+    public  ArrayList<Pojoclasses.Slot> slotsList;
+    public  ArrayList<Pojoclasses.User> usersList;
+    public  Pojoclasses.User currentUser;
 
-    public Controller(Date startDate) {
-
-    }
+    //constructor
     public Controller() {
-
+        this.slotsList = new ArrayList<Pojoclasses.Slot>();
+        this.usersList = new ArrayList<Pojoclasses.User>();;
+        this.currentUser = new Pojoclasses.User("123");
     }
 
 
-
-
-    //Important Functions below
+//Important Functions below
 
     public void onMyAppStart(){
         //populateSlotsArrayListFromDatabase();
-        populateUsersArrayListFromDatabase();
+      //   populateUsersArrayListFromDatabase();
     }
 
     public  Pojoclasses.User getCurrentUser(String licenceNumber) {
-
         if(!licenceNumber.equals("")) {
-            for(Pojoclasses.User user : usersStaticList ){
+            for(Pojoclasses.User user : usersList){
                 if (user.licenceNumber.equals(licenceNumber)){
-
                     currentUser = user;
                     return user;
-
                 }
+            }
+        }
+        return currentUser;
+    }
+
+    public  Pojoclasses.User addNewUser(String licenceNumber) {
+
+        if(!licenceNumber.equals("")) {
+            Pojoclasses.User newUser = new Pojoclasses.User(licenceNumber);
+            usersList.add(newUser);
+            currentUser = newUser;
+            //saveUserStaticLisToDatabase();
+            System.out.println("Added user with Licence #"+ newUser.licenceNumber);
+            return newUser;
 
             }
-            Pojoclasses.User newUser = new Pojoclasses.User(licenceNumber);
-            usersStaticList.add(newUser);
-            currentUser = newUser;
-            saveUserStaticLisToDatabase();
+        System.out.println("add user failed - is the licenceNumber entered?");
+        return null;
+    }
 
-            return newUser;
-        }
-
+    public ArrayList<Pojoclasses.Slot> getTimeslotBooking(String licenceNumber){
 
         return null;
     }
 
-//    public ArrayList<Pojoclasses.Slot> getTimeslotBooking(String licenceNumber){
-//        Pojoclasses.User u1 = getCurrentUser();
-//        if (u1!=null && u1.licenceNumber.equals(licenceNumber) && !u1.bookingsList.isEmpty()){
-//            ArrayList<Pojoclasses.Slot> sl = new ArrayList<Pojoclasses.Slot>();
-//            for(Pojoclasses.Booking booking:u1.bookingsList){
-//                sl.add(booking.slot);
-//            }
-//            return sl;
-//
-//        }
-//
-//        return null;
-//    }
-//
-//    public  boolean bookTimeSlot(Pojoclasses.User u1, String day, int hour) {
-//        try {
-//
-//            if (userHasMoreThanTwoBookings(selectedSlot)) {
-//                Toast t1= Toast.makeText(BookSlot.this,"You can NOt have more thant 2 bookings for "+day,Toast.LENGTH_LONG);
-//                t1.show();
-//            } else {
-//
-//
-//                if (slot_available(day, hour) != null) {
-//                    selectedSlot = slot_available(day, hour);
-//                    selectedSlot.remainingTimes--;
-//                    Pojoclasses.Booking newBooking = new Pojoclasses.Booking(selectedSlot);
-//                    //CHECK LATER - need to chk if this user has already booked this slot then he can not book again
-//                    u1.bookingsList.add(newBooking);
-//                    return true;
-//                } else {
-//                    //Toast.makeText(this,"FAILED",Toast.LENGTH_LONG);
-//                    System.out.println("FAILED to book");
-//                    return false;
-//                }
-//            }
-//        }catch(Exception e){
-//            e.printStackTrace();
-//
-//
-//        }
-//        return false;
-//    }
+    public  boolean bookTimeSlot(String licenceNumber, String day, int hour) {
+
+        return false;
+    }
 
 
 
@@ -136,6 +104,7 @@ public class Controller {
             }
         }
         System.out.println("returning Null");
+        //means slot is not available for the specific day 
         return null;
     }
 
@@ -159,55 +128,34 @@ public class Controller {
 
 
 
-
-    public void populateSlotsArrayListFromDatabase(Date argStartDate) {
-        //TODO
-        if(argStartDate!=null){
-
-        }else{
-
-            String startDateString = "09/04/2020 09:00";
-
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-            Date startDate = null;
-            try {
-                startDate = sdf.parse(startDateString);
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Date dateForSlot = startDate;
-            Calendar cal = Calendar.getInstance(); // creates calendar
-
-            for (int i = 0; i < 7; i++) {//days
-                cal.setTime(dateForSlot);
-                // sets calendar time/date
-                if(cal.get(Calendar.DAY_OF_WEEK)==1||cal.get(Calendar.DAY_OF_WEEK)==7){
-                    cal.add(Calendar.DAY_OF_WEEK, 1); // adds day
-                    dateForSlot = cal.getTime();
-                }else{
-                    dateForSlot = cal.getTime();
-                    for (int j = 0; j < 8; j++) {//8 slots each day
-                        slotsList.add(new Pojoclasses.Slot(dateForSlot));
-                        // long millis = date.getTime();
-//                   cal.setTime(dateForSlot); // sets calendar time/date
-                        cal.add(Calendar.HOUR_OF_DAY, 1); // adds one hour
-                        dateForSlot = cal.getTime();
-
-                    }
-                    cal.add(Calendar.HOUR_OF_DAY, 16);
-                    dateForSlot = cal.getTime();
-                }
+    public Pojoclasses.User getUserFromList(String licenceNumber){
+        for(Pojoclasses.User user: usersList) {
+            if (user.licenceNumber.equals(licenceNumber)) {
+                return user;
             }
         }
-
-
+        //returns null if user not found in the UserStatic Array List
+        return null;
     }
 
-    public void populateUsersArrayListFromDatabase() {
-        //TODO
+    public void showToast(Context c, String s) {
+        Toast t1 = Toast.makeText(c,s,Toast.LENGTH_SHORT);
+        t1.show();
     }
 
-    public void saveUserStaticLisToDatabase() {
-        //TODO
+    public boolean isOldUser(String licenceNumber) {
+        if(getUserFromList(licenceNumber)!=null){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setCurrentUser(String licenceNumber) {
+        currentUser = getUserFromList(licenceNumber);
+        if(currentUser.equals(null)){
+            return false;
+        }else{
+            return true;
+        }
     }
 }
