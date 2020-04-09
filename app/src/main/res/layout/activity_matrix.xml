@@ -7,40 +7,52 @@
     tools:context=".MatrixActivity">
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/date6RecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="5dp"
+        android:scrollbars="horizontal|vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dateRecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="5dp"
         android:scrollbars="horizontal|vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
         app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/date2RecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="5dp"
         android:scrollbars="horizontal|vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/dateRecyclerView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/date3RecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="5dp"
         android:scrollbars="horizontal|vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/date2RecyclerView" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/date4RecyclerView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="5dp"
         android:scrollbars="horizontal|vertical"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
         app:layout_constraintTop_toBottomOf="@+id/date3RecyclerView" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -48,8 +60,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="5dp"
         android:scrollbars="horizontal|vertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date4RecyclerView" />
+        app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/date4RecyclerView">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
