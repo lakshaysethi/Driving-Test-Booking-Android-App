@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.User;
 import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.Slot;
+import com.lakshaysethi.driverlicencetestbooking.Pojoclasses.Booking;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -27,6 +28,7 @@ public class Controller {
 //Important Functions below
 
 
+    //===============================================================================
 
     public ArrayList<Slot> getTimeslotBooking(String licenceNumber){
 
@@ -42,29 +44,45 @@ public class Controller {
         * 3.it finds the Slot from the slots list using the day and the time;
         * 4.checks if user should be allowed to book
         * 5.it creates a new booking Object using the Slot and adds this booking object to User
-        * 6.it returns true then
+        * 6. modifies the slot object's remainings
+        * 7.it returns true then
         * */
         //check licence
         if(!licenceNumber.equals("")) {
+
             User u1 = getOrCreateUser(licenceNumber);
-
             Slot s1 = getSlot(day,hour);
+            Booking b1 = new Booking(s1);
+            if(!u1.hasMoreThanTwoBookingsForAday(s1)){
+                if(!u1.getAllSlots().contains(s1)){// do not book the dame slot
+                    if(s1.remainingTimes>=1){
+                        u1.bookingsList.add(b1);
+                        s1.remainingTimes--;
+                        return true;
 
+                    }
+                    }
+
+            }
         }
         return false;
 
     }
 
+
+    //================================================================================
     private Slot getSlot(String day, int hour) {
 
         Date d1 = parseInputDateAndTime( day, hour);
         Slot s1 = new Slot(d1);
 
         for(Slot s2: slotsList){
-            if(s2.equals(s1)){
+            if(s2.date.equals(s1.date)){
+                s1= s2;
                 return s1;
             }
         }
+
 
 
         return null;
