@@ -16,12 +16,17 @@ public class Pojoclasses {
         public String toString() {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
             String dateString = sdf.format(date);
-            return  dateString + this.remainingTimes +" left";
+            return  dateString +" "+ this.remainingTimes +" left";
         }
         public Slot(Date date) {
             this.date = date;
             this.remainingTimes = 10;
 
+        }
+        public String getDayString(){
+            SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+            String dateString = sdf.format(this.date);
+            return dateString;
         }
         public String getDateString() {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");

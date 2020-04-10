@@ -41,8 +41,9 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
 // main method
     @Override
     public void onBindViewHolder(@NonNull final SlotViewHolder holder, final int position) {
+        Pojoclasses.Slot obj = slotAdapterSlotArrayList.get(position);
         if (holder.workingon==1){
-            holder.dateAndDayTextView.setText("\n\nDate:   14/04/2020  \n\nDay:     Thursday");
+            holder.dateAndDayTextView.setText("\nDate:   "+obj.getDateString()  +"\n\nDay:    "+ obj.getDayString()+"\n");
         }else if(holder.workingon ==2){
             holder.availableInstructorsTextView.setText("Available Instructors: "+Integer.toString(slotAdapterSlotArrayList.get(position).remainingTimes));
             holder.timeTextView.setText("Time: " + slotAdapterSlotArrayList.get(position).getTimeString() + " 1 Hr");
