@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/myBookingsTextView"
-        style="@android:style/Widget.EditText"
+        style="@android:style/Widget.TextView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:ems="10"
