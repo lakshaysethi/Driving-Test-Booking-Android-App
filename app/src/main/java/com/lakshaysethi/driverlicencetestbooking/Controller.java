@@ -25,7 +25,7 @@ public class Controller {
 
 
 
-//Important Functions below
+    //Important Assignment Functions below
 
 
     //===============================================================================
@@ -33,6 +33,7 @@ public class Controller {
     public ArrayList<Slot> getTimeslotBooking(String licenceNumber){
         User u1 = getOrCreateUser(licenceNumber);
         ArrayList<Slot> al = u1.getAllSlots();
+
         return al;
     }
 
@@ -80,7 +81,7 @@ public class Controller {
     }
 
 
-    ArrayList<Slot> getSlots(String day){
+    public ArrayList<Slot> getSlots(String day){
         /*
         * Causion while useing this - stick to the good date format ok?
         * ie dd/MM/yyyy
@@ -96,6 +97,9 @@ public class Controller {
     }
 
     //================================================================================
+    
+
+
     private Slot getSlot(String day, int hour) {
 
         Date d1 = parseInputDateAndTime( day, hour);
