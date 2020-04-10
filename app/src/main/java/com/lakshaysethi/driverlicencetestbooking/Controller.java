@@ -31,8 +31,9 @@ public class Controller {
     //===============================================================================
 
     public ArrayList<Slot> getTimeslotBooking(String licenceNumber){
-
-        return null;
+        User u1 = getOrCreateUser(licenceNumber);
+        ArrayList<Slot> al = u1.getAllSlots();
+        return al;
     }
 
     public  boolean bookTimeSlot(String licenceNumber, String day, int hour) {//TODO
@@ -54,14 +55,14 @@ public class Controller {
             Slot s1 = getSlot(day,hour);
             Booking b1 = new Booking(s1);
             if(!u1.hasMoreThanTwoBookingsForAday(s1)){
-                if(!u1.getAllSlots().contains(s1)){// do not book the dame slot
+                if(!getTimeslotBooking(licenceNumber).contains(s1)){// do not book the dame slot
                     if(s1.remainingTimes>=1){
                         u1.bookingsList.add(b1);
                         s1.remainingTimes--;
                         return true;
 
                     }
-                    }
+                }
 
             }
         }
