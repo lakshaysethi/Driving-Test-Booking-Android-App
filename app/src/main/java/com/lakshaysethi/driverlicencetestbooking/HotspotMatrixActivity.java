@@ -29,6 +29,7 @@ public class HotspotMatrixActivity extends AppCompatActivity {
         TableRow tableRowTop = new TableRow(this);
         tableRowTop.setBackgroundColor(Color.GRAY);
         hotspotTable.addView(tableRowTop);
+
         int startHour = 900;
         ArrayList<TextView> headtvAl = new ArrayList<TextView>();
         for(int i=0;i<9;i++){
@@ -46,8 +47,9 @@ public class HotspotMatrixActivity extends AppCompatActivity {
         }
 
         ArrayList<TableRow> tableRowArrayList = new ArrayList<>();
-        int numberOfCellsNeeded = 5*9;
 
+        int numberOfCellsNeeded = 5*9;
+        int count =0;
         for(int i=0; i<numberOfCellsNeeded;i++){
 
             if(i%9==0){//if first cell of the row so make a new row
@@ -58,20 +60,24 @@ public class HotspotMatrixActivity extends AppCompatActivity {
             TextView tv = new TextView(this);
 
             if(i%9==0){
-                tv.setText(c.getArrayListOfUniqueDates(Controller.slotsList).get(i).getDateString());
+                tv.setText(c.getArrayListOfUniqueDates(Controller.slotsList).get(i/9).getDateString());
+                count++;
             }else{
-                Slot s1 = Controller.slotsList.get(i-1);
+                Slot s1 = Controller.slotsList.get(i-count);
                 int numberOfBookings = 10-s1.remainingTimes;
-                tv.setText(numberOfBookings);
+                tv.setText(Integer.toString(numberOfBookings));
                 setColor(tv,numberOfBookings);
 
             }
-            tableRowArrayList.get(i%9).addView(tv);
+
+            tableRowArrayList.get(i/9).addView(tv);
 
 
         }
 
-
+        for(TableRow tr:tableRowArrayList){
+            hotspotTable.addView(tr);
+        }
     }
 
     private void setColor(TextView tv, int numberOfBookings) {
