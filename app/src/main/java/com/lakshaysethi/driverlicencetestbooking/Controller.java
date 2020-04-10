@@ -97,7 +97,7 @@ public class Controller {
     }
 
     //================================================================================
-    
+
 
 
     private Slot getSlot(String day, int hour) {
