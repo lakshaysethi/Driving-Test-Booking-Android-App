@@ -27,7 +27,7 @@ public class HotspotMatrixActivity extends AppCompatActivity {
         TableLayout hotspotTable = (TableLayout) findViewById(R.id.hotspot_table);
 
         TableRow tableRowTop = new TableRow(this);
-        tableRowTop.setBackgroundColor(Color.GRAY);
+        tableRowTop.setBackgroundColor(Color.rgb(229, 209, 240));
         hotspotTable.addView(tableRowTop);
 
         int startHour = 900;
@@ -37,8 +37,9 @@ public class HotspotMatrixActivity extends AppCompatActivity {
             TextView tv = new TextView(this);
             if(i==0){
                 tv.setText("Days/Time Slots");
+                tv.setBackgroundColor(Color.WHITE);
             }else{
-                tv.setText(c.getStringHourFromInt(startHour)+"-"+c.getStringHourFromInt(startHour+100));
+                tv.setText("  "+c.getStringHourFromInt(startHour)+"-"+c.getStringHourFromInt(startHour+100)+" ");
                 startHour+=100;
             }
             tableRowTop.addView(tv);
@@ -61,6 +62,7 @@ public class HotspotMatrixActivity extends AppCompatActivity {
 
             if(i%9==0){
                 tv.setText(c.getArrayListOfUniqueDates(Controller.slotsList).get(i/9).getDateString());
+                tv.setBackgroundColor(Color.rgb(229, 209, 240));
                 count++;
             }else{
                 Slot s1 = Controller.slotsList.get(i-count);
