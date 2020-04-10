@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         licenceInputText = findViewById(R.id.licenceInput);
         continueButton =(Button) findViewById(R.id.continueButton);
         showHotspotMatrixButton = (Button) findViewById(R.id.showAllBookingsMatrixActivityBtn);
-        adminViewButton = (Button) findViewById(R.id.adminViewButton);//disabled
+//        adminViewButton = (Button) findViewById(R.id.adminViewButton);//disabled
 
 
 
@@ -42,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {     openHotspotMatrixActivity();  }
         });
-        adminViewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) { { if(userHasEnteredLicenceNumber(licenceInputText.getText().toString())){   openAdminActivity();  }} }
-        });//depreciated
+       // adminViewButton.setOnClickListener(new View.OnClickListener() {
+       //     @Override
+       //   public void onClick(View v) { { if(userHasEnteredLicenceNumber(licenceInputText.getText().toString())){   openAdminActivity();  }} }
+       //});//depreciated
 
 
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void openHotspotMatrixActivity() {
         Intent intent = new Intent(this,HotspotMatrixActivity.class);
-        //intent.putExtra("licenceNumber",licenceString);
+
         startActivity(intent);
 
     }
@@ -72,18 +72,18 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void openBookSlotActivity(){
-        Intent intent = new Intent(this, BookSlotActivity.class);
-        startActivity(intent);
+//    public void openBookSlotActivity(){
+//        Intent intent = new Intent(this, BookSlotActivity.class);
+//        startActivity(intent);
+//
+//    }//depriciated
 
-    }//depriciated
-
-    private void openAdminActivity() {
-        //TODO
-        Intent intent = new Intent(this,AdminViewActivity.class);
-        //intent.putExtra("licenceNumber",licenceString);
-        startActivity(intent);
-    }//depriciated
+//    private void openAdminActivity() {
+//        //TODO
+//        Intent intent = new Intent(this,AdminViewActivity.class);
+//        //intent.putExtra("licenceNumber",licenceString);
+//        startActivity(intent);
+//    }//depriciated
 
 
 
