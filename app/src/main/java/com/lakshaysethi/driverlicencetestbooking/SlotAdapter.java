@@ -42,7 +42,7 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
     @Override
     public void onBindViewHolder(@NonNull final SlotViewHolder holder, final int position) {
         if (holder.workingon==1){
-            holder.dateAndDayTextView.setText("\n\nDate:   14/04/2020  \n\nDay:     Thursday\n\n\n");
+            holder.dateAndDayTextView.setText("\n\nDate:   14/04/2020  \n\nDay:     Thursday");
         }else if(holder.workingon ==2){
             holder.availableInstructorsTextView.setText("Available Instructors: "+Integer.toString(slotAdapterSlotArrayList.get(position).remainingTimes));
             holder.timeTextView.setText("Time: " + slotAdapterSlotArrayList.get(position).getTimeString() + " 1 Hr");
