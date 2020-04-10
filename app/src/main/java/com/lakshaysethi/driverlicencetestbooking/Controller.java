@@ -71,6 +71,21 @@ public class Controller {
     }
 
 
+    ArrayList<Slot> getSlots(String day){
+        /*
+        * Causion while useing this - stick to the good date format ok?
+        * ie dd/MM/yyyy
+        * */
+        ArrayList<Slot> als = new ArrayList<Slot>();
+        for (Slot slot: slotsList ){
+            if(slot.getDateString().equals(day)){
+                als.add(slot);
+            }
+        }
+        return als;
+
+    }
+
     //================================================================================
     private Slot getSlot(String day, int hour) {
 
