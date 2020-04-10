@@ -50,7 +50,7 @@
         android:layout_width="174dp"
         android:layout_height="50dp"
         android:ems="10"
-        android:hint="987..."
+        android:hint="use 911 for Super User"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/continueButton"
         app:layout_constraintEnd_toEndOf="parent"
