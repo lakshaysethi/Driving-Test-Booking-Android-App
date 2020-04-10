@@ -188,4 +188,14 @@ public class Controller {
     }
 
 
+    public ArrayList<Pojoclasses.Slot> getArrayListOfUniqueDates(ArrayList<Pojoclasses.Slot> slotsList) {
+        ArrayList<Pojoclasses.Slot> al = new ArrayList<Pojoclasses.Slot>();
+        int count=0;
+        for(int i=0;i<5;i++){
+            al.add(slotsList.get(count));
+            count+=8;
+        }
+        return  al;
+
+    }
 }

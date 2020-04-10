@@ -26,7 +26,7 @@ public class BookSlotMatrixActivity extends AppCompatActivity {
     private TextView licenceNumberTextView;
     private Button viewMyBookingsButton;
 
-
+    Controller c = new Controller();
     ArrayList<RecyclerView> rViewArrayList = new ArrayList<RecyclerView>();
 
 
@@ -47,7 +47,7 @@ public class BookSlotMatrixActivity extends AppCompatActivity {
 
         rvLdates = (RecyclerView) findViewById(R.id.date6RecyclerView);
         rvLdates.setLayoutManager(new LinearLayoutManager(this));
-        ArrayList<Pojoclasses.Slot> al = getArrayListOfUniqueDates(Controller.slotsList);
+        ArrayList<Pojoclasses.Slot> al = c.getArrayListOfUniqueDates(Controller.slotsList);
         rvLdates.setAdapter(new SlotAdapter(al,this,R.layout.date_and_day_view));
 
         int count = 0;
@@ -72,16 +72,6 @@ public class BookSlotMatrixActivity extends AppCompatActivity {
 
     }
 
-    private ArrayList<Pojoclasses.Slot> getArrayListOfUniqueDates(ArrayList<Pojoclasses.Slot> slotsList) {
-        ArrayList<Pojoclasses.Slot> al = new ArrayList<Pojoclasses.Slot>();
-        int count=0;
-        for(int i=0;i<5;i++){
-            al.add(slotsList.get(count));
-            count+=8;
-        }
-        return  al;
-
-    }
 
     private void openViewMyBookingsActivity() {
         Intent intent = new Intent(this,ViewMyBookingsActivity.class);
