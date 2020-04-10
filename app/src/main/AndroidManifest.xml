@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".HotspotMatrixActivity"
             android:screenOrientation="landscape"></activity>
-        <activity android:name=".AdminViewActivity" />
+
         <activity android:name=".ViewMyBookingsActivity" />
         <activity
             android:name=".BookSlotMatrixActivity"
