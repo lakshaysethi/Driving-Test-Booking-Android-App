@@ -14,7 +14,7 @@ import java.util.Date;
 
 public class Controller {
     //available everywhere
-    public final static ArrayList<Slot> slotsList = new ArrayList<Slot>();//this class populates and keeps all the slots
+    public final static ArrayList<Slot> slotsList = new ArrayList<Slot>();
     public final static ArrayList<User> usersList = new ArrayList<User>();
     public static String licenceNumber;
 
