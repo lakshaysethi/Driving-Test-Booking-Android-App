@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context=".BookSlotMatrixActivity">
+
+
+    <Button
+        android:id="@+id/viewMyBookingsButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="32dp"
+        android:text="View My Bookings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bookButton"
+        app:layout_constraintVertical_bias="0.38"
+        tools:text="View My Bookings" />
+
+    <TextView
+        android:id="@+id/licenceTextView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Licence #"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.52">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/date6RecyclerView"
+            android:layout_width="wrap_content"
+            android:layout_height="600dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="5dp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dateRecyclerView"
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="5dp"
+            android:scrollbars="horizontal|vertical"
+            app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/date2RecyclerView"
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:scrollbars="horizontal|vertical"
+            app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/dateRecyclerView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/date3RecyclerView"
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="1dp"
+            android:scrollbars="horizontal|vertical"
+            app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/date2RecyclerView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/date4RecyclerView"
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="1dp"
+            android:scrollbars="horizontal|vertical"
+            app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/date3RecyclerView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/date5RecyclerView"
+            android:layout_width="300dp"
+            android:layout_height="120dp"
+            android:layout_marginStart="1dp"
+            android:scrollbars="horizontal|vertical"
+            app:layout_constraintStart_toEndOf="@+id/date6RecyclerView"
+            app:layout_constraintTop_toBottomOf="@+id/date4RecyclerView">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
