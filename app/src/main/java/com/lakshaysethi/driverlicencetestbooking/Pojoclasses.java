@@ -77,14 +77,14 @@ public class Pojoclasses {
             }
             return al;
         }
-        public boolean hasMoreThanTwoBookingsForAday(Slot s1) {
+        public boolean hasMoreThanOneBookingsForAday(Slot s1) {
             int count=0;
             for (Pojoclasses.Booking booking : this.bookingsList){
                     if(s1.getDateString().equals(booking.slot.getDateString())){
                         count++;
                     }
             }
-            if(count>=2){
+            if(count>=1){
                 return true;
             }
             return false;

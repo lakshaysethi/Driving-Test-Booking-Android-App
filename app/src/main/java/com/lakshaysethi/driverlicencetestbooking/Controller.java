@@ -20,7 +20,10 @@ public class Controller {
 
 
     //constructor
-    public Controller() { }
+    public Controller() {
+
+        populateSlotsArrayList();
+    }
 
 
 
@@ -64,7 +67,7 @@ public class Controller {
                 }
             }
 
-            if(!u1.hasMoreThanTwoBookingsForAday(s1)){
+            if(!u1.hasMoreThanOneBookingsForAday(s1)){
                 if(!getTimeslotBooking(licenceNumber).contains(s1)){// do not book the dame slot
                     if(s1.remainingTimes>=1){
                         u1.bookingsList.add(b1);
