@@ -14,16 +14,14 @@ import java.util.ArrayList;
 
 public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder> {
 
-    ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList;
-    Context context;
-    Object layout;
-    Controller controller = new Controller();
+    private ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList;
+    private Object layout;
+    private Controller controller = new Controller();
 
 //constructor
-    public SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context, Object layout) {
+SlotAdapter(ArrayList<Pojoclasses.Slot> slotAdapterSlotArrayList, Context context, Object layout) {
         this.slotAdapterSlotArrayList = slotAdapterSlotArrayList;
-        this.context = context;
-        this.layout = layout;
+    this.layout = layout;
     }
 
 
@@ -67,14 +65,14 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
         }
     }
 
-    public static class SlotViewHolder extends RecyclerView.ViewHolder{
-        public final int workingon;
+    static class SlotViewHolder extends RecyclerView.ViewHolder{
+        final int workingon;
         TextView timeTextView;
         TextView availableInstructorsTextView;
         Button matrixBookButton;
         TextView dateAndDayTextView;
 
-        public SlotViewHolder(@NonNull View itemView) {
+        SlotViewHolder(@NonNull View itemView) {
             super(itemView);
             timeTextView = (TextView) itemView.findViewById(R.id.slotTimeTextView);
             if(timeTextView==null){
