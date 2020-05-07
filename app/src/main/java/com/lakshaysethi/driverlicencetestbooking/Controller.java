@@ -176,6 +176,8 @@ public class Controller {
         try {
             startDate = sdf.parse(startDateString);
         } catch (ParseException e) {
+
+            //TODO give a user level
             e.printStackTrace();
         }
         Date dateForSlot = startDate;
@@ -184,7 +186,7 @@ public class Controller {
         for (int i = 0; i < 7; i++) {//days
             cal.setTime(dateForSlot);
             // sets calendar time/date
-            if (cal.get(Calendar.DAY_OF_WEEK) == 1 || cal.get(Calendar.DAY_OF_WEEK) == 7) {
+            if (cal.get(Calendar.DAY_OF_WEEK) == 1 || cal.get(Calendar.DAY_OF_WEEK) == 7) {//sat or sunday TODO improve to day names
                 cal.add(Calendar.DAY_OF_WEEK, 1); // adds day
                 dateForSlot = cal.getTime();
             } else {

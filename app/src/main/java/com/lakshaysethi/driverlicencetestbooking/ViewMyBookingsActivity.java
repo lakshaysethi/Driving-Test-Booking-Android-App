@@ -15,7 +15,7 @@ public class ViewMyBookingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_my_bookings);
 
         TextView myBookingsTextView = (TextView)findViewById(R.id.myBookingsTextView);
-       Pojoclasses.User u1 = controller.getOrCreateUser(controller.licenceNumber) ;
+        Pojoclasses.User u1 = controller.getOrCreateUser(controller.licenceNumber) ;
         String myBookingsString=  u1.toString();
 
         myBookingsTextView.setText(myBookingsString);

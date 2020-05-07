@@ -9,6 +9,11 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
+
+
+
+// TODO improve tests- tests hsould be totaly indipendent ->
+
 public class UnitTests {
 
     Controller controller = new Controller();
@@ -19,6 +24,13 @@ public class UnitTests {
 //dd/MM/yyyy
         assertTrue(controller.bookTimeSlot("user1","15/04/2020",900));
     }
+    @Test
+    public void testBookSlotsShouldPassOneBooking1() {
+
+//dd/MM/yyyy
+        assertTrue(controller.bookTimeSlot("user1","15/04/2020",900));
+    }
+
 
     @Test
     public void testBookSlotsShouldFailTwoOrMoreDifferentSlotsBookingsInADayBySameUser() {
